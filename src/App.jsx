@@ -1,6 +1,22 @@
 import { Route, Routes } from "react-router";
 import PageHome from "./Page/PageHome";
 import PageLogin from "./Page/PageLogin";
+import "/.global.css";
+
+// Componentes principales
+import Footer from "./Components/Footer";
+import CardVertical from "./Components/Cards/CardVertical";
+import CardVertical from "./Components/Cards/CardHorizontal";
+import SectionNews from "./Components/Blocks/SectionNews";
+
+// Banners
+import BannerVertical from "./Components/Banners/BannerVertical";
+import BannerHorizontal from "./Components/Banners/BannerHorizontal";
+
+// Botones
+import ButtonGeneral from "./Components/Buttons/ButtonGeneral";
+
+
 
 // const PrivateRoute = ({ element }) => {
 //   return isAuth() ? element : <Navigate to="/" />;

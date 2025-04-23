@@ -1,0 +1,144 @@
+@import "tailwindcss";
+@import "tailwindcss/typography";
+@import "tailwindcss/forms";
+@import "tailwindcss/line-clamp";
+@import "tailwindcss/aspect-ratio";
+
+/* 🎨 VARIABLES GLOBALES */
+:root {
+    --color-primary: #204092;        /* Azul original del logo del sitio web */
+    --color-secondary: #e26a25;      /* Naranja original del logo del sitio web */
+    --font-display: "Georgia", serif;
+    --radius-base: 0.5rem; 
+    --transition-base: 0.3s ease-in-out;
+  }
+  
+  /* 🌐 TIPOGRAFÍA BASE */
+  @layer base {
+    html {
+      scroll-behavior: smooth;
+    }
+  
+    body {
+      @apply font-sans text-base text-neutral-800 bg-white leading-relaxed;
+      font-family: var(--font-display);
+      @apply dark:bg-gray-900 dark:text-white;
+    }
+  
+    h1 {
+      @apply text-3xl font-bold text-[color:var(--color-primary)];
+      font-family: var(--font-display);
+    }
+  
+    h2 {
+      @apply text-2xl font-semibold text-neutral-900;
+      font-family: var(--font-display);
+    }
+  
+    h3 {
+      @apply text-xl font-semibold text-[color:var(--color-primary)];
+      font-family: var(--font-display);
+    }
+  
+    p {
+      @apply text-base text-neutral-700;
+    }
+  
+    a {
+      @apply text-[color:var(--color-primary)] underline transition-colors;
+      transition: var(--transition-base);
+    }
+  
+    a:hover {
+      color: var(--color-secondary);
+    }
+  
+    ul {
+      @apply list-disc pl-6;
+    }
+  
+    img {
+      @apply max-w-full h-auto rounded;
+    }
+  
+    button {
+      @apply cursor-pointer transition duration-300;
+    }
+  }
+  
+  /* 📦 COMPONENTES REUTILIZABLES */
+  @layer components {
+    .container-center {
+      @apply max-w-screen-xl mx-auto px-4;
+    }
+  
+    .btn-primary {
+      @apply bg-[color:var(--color-primary)] text-white py-2 px-4 rounded-md font-medium hover:bg-[color:var(--color-secondary)];
+    }
+  
+    .btn-secondary {
+      @apply border border-[color:var(--color-primary)] text-[color:var(--color-primary)] py-2 px-4 rounded-md hover:bg-[color:var(--color-primary)] hover:text-white;
+    }
+  
+    .card {
+      @apply bg-white p-4 rounded shadow-md hover:shadow-lg transition-shadow duration-300;
+    }
+  
+    .section-title {
+      @apply text-2xl font-bold mb-4 text-[color:var(--color-primary)];
+    }
+  }
+  
+  /* 🛠 UTILIDADES PERSONALIZADAS */
+  @layer utilities {
+    .text-shadow {
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  
+    .transition-soft {
+      transition: all var(--transition-base);
+    }
+  
+    .rounded-base {
+      border-radius: var(--radius-base);
+    }
+  
+    .bg-pattern {
+      background-image: url('/images/pattern.svg');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  }
+  
+  /* 🎈 ANIMACIONES ORB Y FLOTACIÓN */
+  @keyframes float1 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(20px, 20px); }
+  }
+  @keyframes float2 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-15px, 15px); }
+  }
+  @keyframes float3 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(0, -20px); }
+  }
+  
+  .animate-float1 {
+    animation: float1 8s ease-in-out infinite;
+  }
+  .animate-float2 {
+    animation: float2 10s ease-in-out infinite;
+  }
+  .animate-float3 {
+    animation: float3 12s ease-in-out infinite;
+  }
+  
+  .orb {
+    transform: translate(-50%, -50%);
+    opacity: 0.3;
+    transition: transform 0.1s ease-out;
+  }
+  
+  
+  
