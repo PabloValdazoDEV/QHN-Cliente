@@ -38,7 +38,7 @@ export default function Footer() {
                 className="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center hover:bg-[color:var(--color-primary)] hover:shadow-lg hover:shadow-[color:var(--color-primary)]/30 transition-all duration-300"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="..." />
+                  {/* <path d="..." /> */}
                 </svg>
               </a>
             </div>
@@ -69,12 +69,14 @@ export default function Footer() {
                 >
                   info@qhn.es
                 </a>
+                <br />
                 <a
                   href="mailto:publicidad@qhn.es"
                   className="text-white hover:text-[color:var(--color-secondary)] transition"
                 >
                   publicidad@qhn.es
                 </a>
+                <br />
                 <a
                   href="mailto:redaccion@qhn.es"
                   className="text-white hover:text-[color:var(--color-secondary)] transition"

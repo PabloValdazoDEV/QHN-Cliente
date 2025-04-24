@@ -13,7 +13,7 @@ const fetchUser = atom(
           }
           try{
             const response = await tryMe(token);
-            console.log(response.user)
+            // console.log(response.user)
             if (response?.user) {
               set(user, response.user);
             } else {

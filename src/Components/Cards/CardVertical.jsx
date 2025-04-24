@@ -2,7 +2,7 @@ export default function CardVertical({ title, description, image, link }) {
     return (
       <a
         href={link || '#'}
-        className="block group transition-soft rounded-base overflow-hidden bg-white shadow-md hover:shadow-lg dark:bg-neutral-900"
+        className="block group transition-soft rounded-base overflow-hidden bg-white shadow-md hover:shadow-lg dark:bg-neutral-900 rounded-lg"
       >
         <img
           src={image}
@@ -10,10 +10,10 @@ export default function CardVertical({ title, description, image, link }) {
           className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
         />
         <div className="p-4">
-          <h3 className="text-xl font-display font-semibold text-[color:var(--color-primary)] group-hover:underline mb-2">
+          <h3 className="text-xl font-display font-semibold text-[color:var(--color-primary)] group-hover:underline mb-2 dark:text-neutral-300">
             {title}
           </h3>
-          <p className="text-base text-neutral-700 dark:text-neutral-300">
+          <p className="text-base text-neutral-700 dark:text-neutral-300 rounded-lg">
             {description}
           </p>
         </div>

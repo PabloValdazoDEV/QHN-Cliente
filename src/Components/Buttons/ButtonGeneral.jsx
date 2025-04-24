@@ -8,7 +8,8 @@ export default function ButtonGeneral({
       <button
         type={type}
         onClick={onClick}
-        className={`transition-soft font-medium ${className}`.trim()}
+        className={`transition-transform duration-200 ease-in-out transform hover:scale-105 font-medium px-4 py-2 rounded-md ${className}`.trim()}
+
       >
         {children}
       </button>

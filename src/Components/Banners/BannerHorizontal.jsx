@@ -1,6 +1,6 @@
 import ButtonBanner from "../Buttons/ButtonBanner";
 
-export default function BannerHorizontal({ image, message }) {
+export default function BannerHorizontal({ image, message, onClickButton, textButton }) {
   return (
     <div
       className="relative w-full h-60 md:h-72 rounded-lg overflow-hidden flex items-center justify-center text-center"
@@ -15,7 +15,7 @@ export default function BannerHorizontal({ image, message }) {
         <h2 className="text-lg md:text-2xl font-bold leading-snug max-w-4xl mx-auto">
           {message || "Viaja en familia y crea recuerdos inolvidables en cada destino"}
         </h2>
-        <ButtonBanner />
+         <ButtonBanner onClick={onClickButton} children={textButton}/>
       </div>
     </div>
   );

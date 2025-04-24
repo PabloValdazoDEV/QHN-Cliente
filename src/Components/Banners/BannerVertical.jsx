@@ -1,9 +1,9 @@
 import ButtonBanner from "../Buttons/ButtonBanner";
 
-export default function BannerVertical({ image, message }) {
+export default function BannerVertical({ image, message, onClickButton, textButton }) {
   return (
     <div
-      className="relative w-full h-96 md:h-[500px] rounded-lg overflow-hidden flex items-center justify-center text-center"
+      className="relative w-72 h-96 md:h-[500px] rounded-lg overflow-hidden flex items-center justify-center text-center"
       style={{
         backgroundImage: `url(${image})`,
         backgroundSize: "cover",
@@ -15,7 +15,7 @@ export default function BannerVertical({ image, message }) {
         <h2 className="text-xl md:text-2xl font-bold leading-snug">
           {message || "¡Haz del shopping una experiencia divertida para toda la familia!"}
         </h2>
-        <ButtonBanner />
+        <ButtonBanner onClick={onClickButton} children={textButton}/>
       </div>
     </div>
   );

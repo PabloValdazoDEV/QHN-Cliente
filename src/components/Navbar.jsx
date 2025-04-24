@@ -159,8 +159,6 @@ const Navbar = () => {
 
             {/* Login */}
 
-            {console.log(userContext)}
-
             {userContext &&(
               <Link to={`/${userContext.role.toLowerCase()}`} className="text-gray-700 hover:text-blue-600">
                 DashBoard
