@@ -3,16 +3,45 @@ import PageHome from "./Page/PageHome";
 import PageLogin from "./Page/PageLogin";
 import PageAdmin from "./Page/PageAdmin";
 import isAuth from "./Api/middelware";
-
-const PrivateRoute = ({ element }) => {
-  return isAuth() ? element : <Navigate to="/" />;
-};
+import { useEffect } from "react";
+import { useAtom, useSetAtom } from "jotai";
+import { fetchUser, user } from "./Context/User";
+import PageCollaborator from "./Page/PageCollaborator";
+import { useUserRole } from "./Hooks/useUserRole";
 
 const PublicRoute = ({ element }) => {
-  return !isAuth() ? element : <Navigate to="/admin" />;
+  const { role, loading } = useUserRole();
+  if (loading) return <div>Cargando...</div>;
+  if (role === "ADMIN") return <Navigate to="/admin" />
+  if (role === "COLLABORATOR") return <Navigate to="/collaborator" />
+  return element;
+};
+
+const AdminRouter = ({ element }) => {
+  const { role, loading } = useUserRole();
+
+  if (loading) return <div>Cargando...</div>;
+  if (role === "ADMIN") return element;
+  console.log(role)
+  return <Navigate to="/" />;
+};
+
+const CollaboratorRouter = ({ element }) => {
+  const { role, loading } = useUserRole();
+
+  if (loading) return <div>Cargando...</div>;
+  if (role === "COLLABORATOR") return element;
+
+  return <Navigate to="/" />;
 };
 
 function App() {
+  const fetchUserContext = useSetAtom(fetchUser);
+
+  useEffect(() => {
+    fetchUserContext();
+  }, []);
+
   return (
     <>
       <Routes>
@@ -25,7 +54,11 @@ function App() {
           />
           <Route
             path="admin"
-            element={<PrivateRoute element={<PageAdmin />} />}
+            element={<AdminRouter element={<PageAdmin />} />}
+          />
+          <Route
+            path="collaborator"
+            element={<CollaboratorRouter element={<PageCollaborator />} />}
           />
         </Route>
         <Route path="*" element={<h1>404 - Página no encontrada</h1>} />

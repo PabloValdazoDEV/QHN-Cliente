@@ -1,5 +1,12 @@
+import { useNavigate } from "react-router"
+
 const PageHome = () =>{
-    return (<><h1>Home</h1></>)
+
+    const navigate = useNavigate();
+
+    return (<><h1>Home</h1><button onClick={()=>{
+        navigate("/login")
+    }}>Login</button></>)
 }
 
 export default PageHome
