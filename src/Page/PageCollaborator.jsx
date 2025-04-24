@@ -3,13 +3,13 @@ import { tryLogout } from "../Api/Auth";
 import { fetchUser, user } from "../Context/User";
 import { useAtom, useSetAtom } from "jotai";
 
-const PageAdmin = () => {
+const PageCollaborator = () => {
     const navigate = useNavigate();
     const refetchUser = useSetAtom(fetchUser)
     const [userContext] = useAtom(user)
   return (
     <>
-      <h1>Page Admin</h1>
+      <h1>Page Colaborator</h1>
       <button
         onClick={() => {
           tryLogout()
@@ -23,4 +23,4 @@ const PageAdmin = () => {
   );
 };
 
-export default PageAdmin;
+export default PageCollaborator;
