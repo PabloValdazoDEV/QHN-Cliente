@@ -38,7 +38,7 @@ const tryMe = async (token) => {
       },
     });
 
-    console.log("Usuario desde /me:", response.data);
+    // console.log("Usuario desde /me:", response.data);
     return response.data;
 
   } catch (error) {

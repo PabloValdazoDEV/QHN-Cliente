@@ -2,10 +2,9 @@ import { Navigate, Route, Routes } from "react-router";
 import PageHome from "./Page/PageHome";
 import PageLogin from "./Page/PageLogin";
 import PageAdmin from "./Page/PageAdmin";
-import isAuth from "./Api/middelware";
 import { useEffect } from "react";
-import { useAtom, useSetAtom } from "jotai";
-import { fetchUser, user } from "./Context/User";
+import { useSetAtom } from "jotai";
+import { fetchUser } from "./Context/User";
 import PageCollaborator from "./Page/PageCollaborator";
 import { useUserRole } from "./Hooks/useUserRole";
 
@@ -22,7 +21,7 @@ const AdminRouter = ({ element }) => {
 
   if (loading) return <div>Cargando...</div>;
   if (role === "ADMIN") return element;
-  console.log(role)
+  // console.log(role)
   return <Navigate to="/" />;
 };
 
