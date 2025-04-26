@@ -1,14 +1,15 @@
-export default function InputEmail({
-    placeholder = "Tu Email",
+export default function InputGeneral({
+    type = "text",
+    placeholder = "Escribe aquí...",
     value,
     onChange,
-    name = "email",
+    name,
     required = false,
     className = "",
   }) {
     return (
       <input
-        type="email"
+        type={type}
         name={name}
         value={value}
         onChange={onChange}

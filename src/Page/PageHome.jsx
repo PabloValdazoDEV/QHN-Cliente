@@ -12,6 +12,9 @@ import BannerHorizontal from "../Components/Banners/BannerHorizontal";
 // Botones
 import ButtonGeneral from "../Components/Buttons/ButtonGeneral";
 
+// Input
+import InputGeneral from "../Components/Input/InputGeneral";
+
 const PageHome = () => {
   const navigate = useNavigate();
 
@@ -21,7 +24,7 @@ const PageHome = () => {
       <p className="text-gray-600 mb-4">Esta es la página principal.</p>
       <CardVertical
         title={"Titulo"}
-        description={"vjurbnv 9uwg v8wg vgwgv"}
+        description={"vjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgv"}
         link={"/ciudades/madrid"}
         image={
           "https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1"
@@ -29,7 +32,7 @@ const PageHome = () => {
       />
       <CardHorizontal
         title={"Titulo"}
-        description={"vjurbnv 9uwg v8wg vgwgv"}
+        description={"vvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgvvjurbnv 9uwg v8wg vgwgv"}
         link={"/ciudades/madrid"}
         image={
           "https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1"
@@ -60,6 +63,16 @@ const PageHome = () => {
 
       <ButtonGeneral
         children={"hola"}
+        onClick={() => {
+          console.log("Button");
+        }}
+        className={"bg-blue-500 text-white"}
+        />
+        </div>
+              <div>
+
+      <InputGeneral
+        type={"text"}
         onClick={() => {
           console.log("Button");
         }}
