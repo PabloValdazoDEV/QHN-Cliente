@@ -15,7 +15,7 @@ export default function InputGeneral({
         onChange={onChange}
         required={required}
         placeholder={placeholder}
-        className={`w-full bg-neutral-800 border border-neutral-700 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)] text-white ${className}`}
+        className={`w-full bg-gray-100 border border-neutral-200 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-neutral-700  text-neutral-700 ${className}`}
       />
     );
   }

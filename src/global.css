@@ -8,7 +8,7 @@
 :root {
     --color-primary: #204092;        /* Azul original del logo del sitio web */
     --color-secondary: #e26a25;      /* Naranja original del logo del sitio web */
-    --font-display: "Georgia", serif;
+    --font-display: "Arial", serif;
     --radius-base: 0.5rem; 
     --transition-base: 0.3s ease-in-out;
   }

@@ -76,7 +76,6 @@ const PageHome = () => {
         onClick={() => {
           console.log("Button");
         }}
-        className={"bg-blue-500 text-white"}
         />
         </div>
     </div>
