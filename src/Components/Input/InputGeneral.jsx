@@ -6,6 +6,8 @@ export default function InputGeneral({
     name,
     required = false,
     className = "",
+    id,
+    ...rest
   }) {
     return (
       <input
@@ -15,6 +17,8 @@ export default function InputGeneral({
         onChange={onChange}
         required={required}
         placeholder={placeholder}
+        id={id}
+        {...rest}
         className={`w-full bg-gray-100 border border-neutral-200 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-neutral-700  text-neutral-700 ${className}`}
       />
     );

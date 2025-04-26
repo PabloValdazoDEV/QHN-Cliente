@@ -7,7 +7,7 @@ import { tryLogout } from "../Api/Auth";
 const Navbar = () => {
   const navegate = useNavigate();
   const [userContext] = useAtom(user);
-  const refetchUser = useSetAtom(fetchUser)
+  const refetchUser = useSetAtom(fetchUser);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCitiesOpen, setIsCitiesOpen] = useState(false);
@@ -79,7 +79,12 @@ const Navbar = () => {
                 </svg>
               </button>
               {isCitiesOpen && (
-                <div className="absolute z-10 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                <div
+                  className="absolute z-10 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+                  onMouseLeave={() => {
+                    setIsCitiesOpen(false);
+                  }}
+                >
                   <div className="py-1">
                     {cities.map((city) => (
                       <Link
@@ -125,7 +130,10 @@ const Navbar = () => {
                 </svg>
               </button>
               {isCategoriesOpen && (
-                <div className="absolute z-10 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                <div className="absolute z-10 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+                onMouseLeave={() => {
+                  setIsCategoriesOpen(false);
+                }}>
                   <div className="py-1">
                     {categories.map((category) => (
                       <Link
@@ -159,11 +167,14 @@ const Navbar = () => {
 
             {/* Login */}
 
-            {userContext &&(
-              <Link to={`/${userContext.role.toLowerCase()}`} className="text-gray-700 hover:text-blue-600">
+            {userContext && (
+              <Link
+                to={`/${userContext.role.toLowerCase()}`}
+                className="text-gray-700 hover:text-blue-600"
+              >
                 DashBoard
               </Link>
-            ) }
+            )}
 
             {userContext === null ? (
               <Link to="/login" className="text-gray-700 hover:text-blue-600">
@@ -321,14 +332,20 @@ const Navbar = () => {
               Contacto
             </Link>
 
-            {userContext &&(
-              <Link to={`/${userContext.role.toLowerCase()}`} className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">
+            {userContext && (
+              <Link
+                to={`/${userContext.role.toLowerCase()}`}
+                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+              >
                 DashBoard
               </Link>
-            ) }
+            )}
 
             {userContext === null ? (
-              <Link to="/login" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">
+              <Link
+                to="/login"
+                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+              >
                 Iniciar Sesión
               </Link>
             ) : (
