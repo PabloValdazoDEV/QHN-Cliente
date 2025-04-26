@@ -3,7 +3,12 @@ import ButtonBanner from "../Buttons/ButtonBanner";
 export default function BannerVertical({ image, message, onClickButton, textButton }) {
   return (
     <div
-      className="relative w-72 h-96 md:h-[500px] rounded-lg overflow-hidden flex items-center justify-center text-center group"
+      className="relative md:max-w-72 h-64 md:h-[500px] rounded-lg overflow-hidden flex items-center justify-center text-center group"
+      style={{
+        backgroundImage: `url(${image})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
     >
       <div
         className="absolute inset-0 bg-cover bg-center transition-transform duration-700 scale-100 group-hover:scale-110"
