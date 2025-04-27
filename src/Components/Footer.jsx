@@ -192,31 +192,46 @@ export default function Footer() {
             
             <a
               href="mailto:info@qhn.es"
-              className=" text-neutral-700 hover:text-[color:var(--color-primary)] transition no-underline"
+              className="flex items-center text-neutral-700 hover:text-[color:var(--color-primary)] transition no-underline"
             >
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 mr-2 [stroke:var(--color-primary)]" viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
+                <rect width="20" height="16" x="2" y="4" rx="2"/>
+                <path d="m22 7l-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
               info@qhn.es
             </a>
-            <br />
+
             <a
               href="mailto:publicidad@qhn.es"
-              className=" text-neutral-700 hover:text-[color:var(--color-primary)] transition no-underline"
+              className="flex items-center text-neutral-700 hover:text-[color:var(--color-primary)] transition no-underline"
             >
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 mr-2 [stroke:var(--color-primary)]" viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
+                <rect width="20" height="16" x="2" y="4" rx="2"/>
+                <path d="m22 7l-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
               publicidad@qhn.es
             </a>
-            <br />
+
             <a
               href="mailto:redaccion@qhn.es"
-              className=" text-neutral-700 hover:text-[color:var(--color-primary)] transition no-underline"
+              className="flex items-center text-neutral-700 hover:text-[color:var(--color-primary)] transition no-underline"
             >
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 mr-2 [stroke:var(--color-primary)]" viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
+                <rect width="20" height="16" x="2" y="4" rx="2"/>
+                <path d="m22 7l-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
               redaccion@qhn.es
             </a>
             <br />
             <br />
            
             <a
-              href="tel:+34 666 66 66 66"
-              className=" text-neutral-700 hover:text-[color:var(--color-primary)] transition no-underline"
+              href="tel:+34666666666"
+              className="flex items-center text-neutral-700 hover:text-[color:var(--color-primary)] transition no-underline"
             >
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 mr-2 [stroke:var(--color-primary)]" viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2a19.8 19.8 0 0 1-8.63-3.07a19.5 19.5 0 0 1-6-6a19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72a12.8 12.8 0 0 0 .7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45a12.8 12.8 0 0 0 2.81.7A2 2 0 0 1 22 16.92"/>
+              </svg>
               666 66 66 66
             </a>
           </div>

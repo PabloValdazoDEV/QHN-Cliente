@@ -4,9 +4,11 @@ import BannerVertical from "../Components/Banners/BannerVertical";
 import CardVerticalMini from "../Components/Cards/CardVerticalMini";
 import BannerHorizontal from "../Components/Banners/BannerHorizontal";
 import ButtonGeneral from "../Components/Buttons/ButtonGeneral";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const PageHome = () => {
+
+  const navigate = useNavigate()
   // Estados
   const [masNoticias, setMasNoticias] = useState(1);
   const [ultimoPost, setUltimoPost] = useState(null);
@@ -16,23 +18,28 @@ const PageHome = () => {
   const infoNoticias = [
     {
       title: "Titulo",
-      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
       link: "/ciudades/madrid",
-      image: "https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1",
+      image:
+        "https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1",
     },
   ];
 
   const infoMasNoticias = [
     {
       title: "Titulo",
-      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
       link: "/ciudades/madrid",
-      image: "https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1",
+      image:
+        "https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1",
     },
   ];
 
   const infoBannerOcio = {
-    image: "https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1",
+    image:
+      "https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1",
     message: "Titulo Banner",
     onClickButton: () => {
       console.log("Boton del Banner");
@@ -83,125 +90,131 @@ const PageHome = () => {
     {
       nombre: "Madrid",
       imagen: "/images/madrid.jpg",
-      descripcion: "Madrid es la capital de España y una de las ciudades más vibrantes de Europa.",
+      descripcion:
+        "Madrid es la capital de España y una de las ciudades más vibrantes de Europa.",
       posts: [
         {
           title: "Evento en Madrid",
           description: "Descripción del evento en Madrid",
           link: "/ciudades/madrid/evento-1",
-          image: "/images/madrid.jpg"
+          image: "/images/madrid.jpg",
         },
         {
           title: "Noticia Madrid",
           description: "Descripción de la noticia en Madrid",
           link: "/ciudades/madrid/noticia-1",
-          image: "/images/madrid.jpg"
-        }
-      ]
+          image: "/images/madrid.jpg",
+        },
+      ],
     },
     {
       nombre: "Barcelona",
       imagen: "/images/barcelona.jpg",
-      descripcion: "Barcelona es conocida por su arquitectura modernista y su vibrante vida cultural.",
+      descripcion:
+        "Barcelona es conocida por su arquitectura modernista y su vibrante vida cultural.",
       posts: [
         {
           title: "Evento en Barcelona",
           description: "Descripción del evento en Barcelona",
           link: "/ciudades/barcelona/evento-1",
-          image: "/images/barcelona.jpg"
+          image: "/images/barcelona.jpg",
         },
         {
           title: "Noticia Barcelona",
           description: "Descripción de la noticia en Barcelona",
           link: "/ciudades/barcelona/noticia-1",
-          image: "/images/barcelona.jpg"
-        }
-      ]
+          image: "/images/barcelona.jpg",
+        },
+      ],
     },
     {
       nombre: "Valencia",
       imagen: "/images/valencia.jpg",
-      descripcion: "Valencia es famosa por su Ciudad de las Artes y las Ciencias y sus playas.",
+      descripcion:
+        "Valencia es famosa por su Ciudad de las Artes y las Ciencias y sus playas.",
       posts: [
         {
           title: "Evento en Valencia",
           description: "Descripción del evento en Valencia",
           link: "/ciudades/valencia/evento-1",
-          image: "/images/valencia.jpg"
+          image: "/images/valencia.jpg",
         },
         {
           title: "Noticia Valencia",
           description: "Descripción de la noticia en Valencia",
           link: "/ciudades/valencia/noticia-1",
-          image: "/images/valencia.jpg"
-        }
-      ]
+          image: "/images/valencia.jpg",
+        },
+      ],
     },
     {
       nombre: "Sevilla",
       imagen: "/images/sevilla.jpg",
-      descripcion: "Sevilla es conocida por su arquitectura mudéjar y su rica historia.",
+      descripcion:
+        "Sevilla es conocida por su arquitectura mudéjar y su rica historia.",
       posts: [
         {
           title: "Evento en Sevilla",
           description: "Descripción del evento en Sevilla",
           link: "/ciudades/sevilla/evento-1",
-          image: "/images/sevilla.jpg"
+          image: "/images/sevilla.jpg",
         },
         {
           title: "Noticia Sevilla",
           description: "Descripción de la noticia en Sevilla",
           link: "/ciudades/sevilla/noticia-1",
-          image: "/images/sevilla.jpg"
-        }
-      ]
+          image: "/images/sevilla.jpg",
+        },
+      ],
     },
     {
       nombre: "Málaga",
       imagen: "/images/malaga.jpg",
-      descripcion: "Málaga es conocida por su clima mediterráneo y su rico patrimonio cultural.",
+      descripcion:
+        "Málaga es conocida por su clima mediterráneo y su rico patrimonio cultural.",
       posts: [
         {
           title: "Evento en Málaga",
           description: "Descripción del evento en Málaga",
           link: "/ciudades/malaga/evento-1",
-          image: "/images/malaga.jpg"
+          image: "/images/malaga.jpg",
         },
         {
           title: "Noticia Málaga",
           description: "Descripción de la noticia en Málaga",
           link: "/ciudades/malaga/noticia-1",
-          image: "/images/malaga.jpg"
-        }
-      ]
+          image: "/images/malaga.jpg",
+        },
+      ],
     },
     {
       nombre: "Zaragoza",
       imagen: "/images/zaragoza.jpg",
-      descripcion: "Zaragoza es famosa por su Basílica del Pilar y su rica historia romana.",
+      descripcion:
+        "Zaragoza es famosa por su Basílica del Pilar y su rica historia romana.",
       posts: [
         {
           title: "Evento en Zaragoza",
           description: "Descripción del evento en Zaragoza",
           link: "/ciudades/zaragoza/evento-1",
-          image: "/images/zaragoza.jpg"
+          image: "/images/zaragoza.jpg",
         },
         {
           title: "Noticia Zaragoza",
           description: "Descripción de la noticia en Zaragoza",
           link: "/ciudades/zaragoza/noticia-1",
-          image: "/images/zaragoza.jpg"
-        }
-      ]
-    }
+          image: "/images/zaragoza.jpg",
+        },
+      ],
+    },
   ];
 
   // Función para obtener un post aleatorio
   const obtenerUltimoPostAleatorio = () => {
-    const todosLosPosts = ciudadesEjemplo.flatMap(ciudad => 
-      ciudad.posts.map(post => ({
+    const todosLosPosts = ciudadesEjemplo.flatMap((ciudad) =>
+      ciudad.posts.map((post) => ({
         ...post,
-        ciudad: ciudad.nombre
+        ciudad: ciudad.nombre,
       }))
     );
     return todosLosPosts[Math.floor(Math.random() * todosLosPosts.length)];
@@ -229,7 +242,7 @@ const PageHome = () => {
             <BannerHorizontal
               image={ultimoPost.image}
               message={`Última noticia de ${ultimoPost.ciudad}: ${ultimoPost.title}`}
-              onClickButton={() => window.location.href = ultimoPost.link}
+              onClickButton={() => (window.location.href = ultimoPost.link)}
               textButton="Ver más"
             />
           </div>
@@ -272,32 +285,41 @@ const PageHome = () => {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {ciudadesEjemplo.map((ciudad, index) => (
-              <Link 
-                key={index} 
+              <Link
+                key={index}
                 to={`/ciudades/${ciudad.nombre.toLowerCase()}`}
                 className="block no-underline"
               >
                 <div className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
                   <div className="h-48 overflow-hidden">
-                    <img 
-                      src={ciudad.imagen} 
+                    <img
+                      src={ciudad.imagen}
                       alt={ciudad.nombre}
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  
+
                   <div className="p-4">
-                    <h4 className="text-xl font-semibold mb-2">{ciudad.nombre}</h4>
+                    <h4 className="text-xl font-semibold mb-2">
+                      {ciudad.nombre}
+                    </h4>
                     <p className="text-gray-600 mb-4">{ciudad.descripcion}</p>
-                    
+
                     <div className="border-t pt-4">
                       <h5 className="font-medium mb-2">Noticias recientes:</h5>
                       <div className="space-y-3">
                         {ciudad.posts.map((post, postIndex) => (
-                          <div key={postIndex} className="border-b pb-2 last:border-b-0">
+                          <div
+                            key={postIndex}
+                            className="border-b pb-2 last:border-b-0"
+                          >
                             <div className="p-2 rounded">
-                              <h6 className="font-medium text-blue-600">{post.title}</h6>
-                              <p className="text-sm text-gray-500">{post.description}</p>
+                              <h6 className="font-medium text-blue-600">
+                                {post.title}
+                              </h6>
+                              <p className="text-sm text-gray-500">
+                                {post.description}
+                              </p>
                             </div>
                           </div>
                         ))}
@@ -309,6 +331,13 @@ const PageHome = () => {
             ))}
           </div>
         </div>
+      </div>
+      <div>
+        <ButtonGeneral
+          children={"Ver post"}
+          onClick={() => navigate("/post/mi-primer-post")}
+          className={"bg-blue-500 text-white"}
+        />
       </div>
     </div>
   );

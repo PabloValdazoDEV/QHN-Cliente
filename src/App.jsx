@@ -19,6 +19,8 @@ import PageCategories from "./Page/PageCategories";
 import PageCities from "./Page/PageCities";
 import PageAbout from "./Page/PageAbout";
 import PageContact from "./Page/PageContact";
+import PagePost from "./Page/PagePost"; 
+
 
 const PublicRoute = ({ element }) => {
   const { role, loading } = useUserRole();
@@ -64,6 +66,8 @@ function App() {
 
             <Route path="sobre-nosotros" element={<PageAbout />} />
             <Route path="contacto" element={<PageContact />} />
+            
+            <Route path="post/:postTitle" element={<PagePost />} />
 
             <Route
               path="login"
