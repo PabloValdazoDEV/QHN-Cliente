@@ -4,6 +4,7 @@ import BannerVertical from "../Components/Banners/BannerVertical";
 import CardVerticalMini from "../Components/Cards/CardVerticalMini";
 import BannerHorizontal from "../Components/Banners/BannerHorizontal";
 import ButtonGeneral from "../Components/Buttons/ButtonGeneral";
+import { Link } from "react-router";
 
 const PageHome = () => {
   // Estados
@@ -264,23 +265,6 @@ const PageHome = () => {
           />
         </div>
 
-        {/* Sección de Más Noticias */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-          <h3 className="text-2xl font-bold text-gray-800 text-center col-span-full">
-            Más noticias
-          </h3>
-          {masNoticiasOcios.map((card) => card)}
-          <div className="col-span-full text-center">
-            <ButtonGeneral
-              children={"Ver más noticias"}
-              onClick={() => {
-                masNoticias < 3 ? setMasNoticias(masNoticias + 1) : alert("No hay más noticias");
-              }}
-              className={"bg-[color:var(--color-primary)] text-white"}
-            />
-          </div>
-        </div>
-
         {/* Sección de Ciudades */}
         <div className="flex flex-col gap-8">
           <h3 className="text-2xl font-bold text-gray-800 text-center">
@@ -288,12 +272,12 @@ const PageHome = () => {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {ciudadesEjemplo.map((ciudad, index) => (
-              <a 
+              <Link 
                 key={index} 
-                href={`/ciudades/${ciudad.nombre.toLowerCase()}`}
-                className="block"
+                to={`/ciudades/${ciudad.nombre.toLowerCase()}`}
+                className="block no-underline"
               >
-                <div className="border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
+                <div className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
                   <div className="h-48 overflow-hidden">
                     <img 
                       src={ciudad.imagen} 
@@ -321,7 +305,7 @@ const PageHome = () => {
                     </div>
                   </div>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
