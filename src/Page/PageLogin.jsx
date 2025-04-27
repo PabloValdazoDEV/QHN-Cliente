@@ -6,9 +6,17 @@ import { useSetAtom } from "jotai";
 import { fetchUser } from "../Context/User";
 import InputGeneral from "../Components/Input/InputGeneral";
 import ButtonGeneral from "../Components/Buttons/ButtonGeneral";
+import { useState } from "react";
 
 const PageLogin = () => {
-  const { handleSubmit, register, reset } = useForm();
+  const [messageInfo, setMessageInfo] = useState("");
+
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  } = useForm();
   const navigate = useNavigate();
   const refetchUser = useSetAtom(fetchUser);
 
@@ -20,9 +28,29 @@ const PageLogin = () => {
         navigate("/admin");
         refetchUser();
       }
-      if (reponse.message === "Invalid credentials") {
-        alert("Credenciales incorrectas, intentelo de nuevo");
+
+      // setMessageInfo(reponse.message);
+
+      if (
+        reponse.message == "Credenciales invalidas, tienes 2 intentos." ||
+        reponse.message == "Credenciales invalidas, tienes 1 intentos."
+      ) {
+        setMessageInfo(reponse.message);
       }
+      if (reponse.message == "Ese correo no esta registrado") {
+        setMessageInfo(reponse.message);
+      }
+      if (reponse.message == "Ese correo no esta registrado.") {
+        setMessageInfo(reponse.message);
+      }
+      if (
+        reponse.message ==
+        "Ha superado el número máximo de intentos. Intentelo más tarde."
+      ) {
+        setMessageInfo(reponse.message);
+      }
+
+      // console.log(reponse.message);
     },
   });
 
@@ -43,6 +71,12 @@ const PageLogin = () => {
               onSubmit={handleSubmit(onSubmit)}
               className="space-y-4 flex flex-col justify-center"
             >
+              {messageInfo && (
+                <div className="text-center bg-red-400 px-4 py-2 rounded-md">
+                  <p className=" text-white font-medium ">{messageInfo}</p>
+                </div>
+              )}
+
               <InputGeneral
                 placeholder="Email"
                 type="email"
@@ -50,14 +84,31 @@ const PageLogin = () => {
                 name="email"
                 {...register("email", { required: true })}
               />
+              {errors.email && (
+                <p className="text-red-500 text-xs">Campo requerido</p>
+              )}
 
               <InputGeneral
                 placeholder="Contraseña"
                 type="password"
                 id="password"
                 name="password"
-                {...register("password", { required: true })}
+                {...register("password", {
+                  required: true,
+                  pattern: {
+                    value: /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{7,}$/gm,
+                    message: "La contraseña no cumple los parametros",
+                  },
+                })}
               />
+              {errors.password?.type === "required" && (
+                <p className="text-red-500 text-xs">Campo requerido</p>
+              )}
+              {errors.password?.type === "pattern" && (
+                <p className="text-red-500 text-xs">
+                  {errors.password.message}
+                </p>
+              )}
 
               <ButtonGeneral
                 children={"Ingresar"}

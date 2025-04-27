@@ -55,15 +55,17 @@ const Navbar = () => {
             {/* Cities Dropdown */}
             <div className="relative">
               <button
-                onMouseEnter={() => {
+                // onMouseEnter={() => {
+                //   setIsCitiesOpen(!isCitiesOpen);
+                //   setIsCategoriesOpen(false);
+                // }}
+                onClick={() => {
+                  // navegate("/ciudades");
+                  // setIsCitiesOpen(false);
                   setIsCitiesOpen(!isCitiesOpen);
                   setIsCategoriesOpen(false);
                 }}
-                onClick={() => {
-                  navegate("/ciudades");
-                  setIsCitiesOpen(false);
-                }}
-                className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 focus:outline-none"
+                className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 focus:outline-none "
               >
                 <span>Ciudades</span>
                 <svg
@@ -90,7 +92,7 @@ const Navbar = () => {
                       <Link
                         key={city.name}
                         to={city.path}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 no-underline"
                         onClick={() => {
                           setIsCitiesOpen(false);
                         }}
@@ -106,13 +108,16 @@ const Navbar = () => {
             {/* Categories Dropdown */}
             <div className="relative">
               <button
-                onMouseEnter={() => {
+                // onMouseEnter={() => {
+                //   setIsCategoriesOpen(!isCategoriesOpen);
+                //   setIsCitiesOpen(false);
+                // }}
+                onClick={() => {
+                  // navegate("/categorias");
+                  // setIsCategoriesOpen(false);
                   setIsCategoriesOpen(!isCategoriesOpen);
                   setIsCitiesOpen(false);
-                }}
-                onClick={() => {
-                  navegate("/categorias");
-                  setIsCategoriesOpen(false);
+                  
                 }}
                 className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 focus:outline-none"
               >
@@ -130,10 +135,12 @@ const Navbar = () => {
                 </svg>
               </button>
               {isCategoriesOpen && (
-                <div className="absolute z-10 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
-                onMouseLeave={() => {
-                  setIsCategoriesOpen(false);
-                }}>
+                <div
+                  className="absolute z-10 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+                  onMouseLeave={() => {
+                    setIsCategoriesOpen(false);
+                  }}
+                >
                   <div className="py-1">
                     {categories.map((category) => (
                       <Link
@@ -142,7 +149,7 @@ const Navbar = () => {
                         onClick={() => {
                           setIsCategoriesOpen(false);
                         }}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 no-underline"
                       >
                         {category.name}
                       </Link>
@@ -155,13 +162,13 @@ const Navbar = () => {
             {/* About */}
             <Link
               to="/sobre-nosotros"
-              className="text-gray-700 hover:text-blue-600"
+              className="text-gray-700 hover:text-blue-600 no-underline"
             >
               Sobre Nosotros
             </Link>
 
             {/* Contact */}
-            <Link to="/contacto" className="text-gray-700 hover:text-blue-600">
+            <Link to="/contacto" className="text-gray-700 hover:text-blue-600 no-underline">
               Contacto
             </Link>
 
@@ -170,14 +177,14 @@ const Navbar = () => {
             {userContext && (
               <Link
                 to={`/${userContext.role.toLowerCase()}`}
-                className="text-gray-700 hover:text-blue-600"
+                className="text-gray-700 hover:text-blue-600 no-underline"
               >
                 DashBoard
               </Link>
             )}
 
             {userContext === null ? (
-              <Link to="/login" className="text-gray-700 hover:text-blue-600">
+              <Link to="/login" className="text-gray-700 hover:text-blue-600 no-underline">
                 Iniciar Sesión
               </Link>
             ) : (
@@ -187,7 +194,7 @@ const Navbar = () => {
                   navigate("/");
                   refetchUser();
                 }}
-                className="text-gray-700 hover:text-blue-600"
+                className="text-gray-700 hover:text-blue-600 no-underline"
               >
                 Cerrar Sesión
               </Link>
@@ -274,7 +281,7 @@ const Navbar = () => {
                     <Link
                       key={city.name}
                       to={city.path}
-                      className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+                      className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 no-underline hover:bg-gray-50 rounded-md"
                     >
                       {city.name}
                     </Link>
@@ -308,7 +315,7 @@ const Navbar = () => {
                     <Link
                       key={category.name}
                       to={category.path}
-                      className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+                      className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 no-underline hover:bg-gray-50 rounded-md"
                     >
                       {category.name}
                     </Link>
@@ -320,14 +327,14 @@ const Navbar = () => {
             {/* Other Links */}
             <Link
               to="/sobre-nosotros"
-              className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+              className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 no-underline hover:bg-gray-50 rounded-md"
             >
               Sobre Nosotros
             </Link>
 
             <Link
               to="/contacto"
-              className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+              className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 no-underline hover:bg-gray-50 rounded-md"
             >
               Contacto
             </Link>
@@ -335,7 +342,7 @@ const Navbar = () => {
             {userContext && (
               <Link
                 to={`/${userContext.role.toLowerCase()}`}
-                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 no-underline hover:bg-gray-50 rounded-md"
               >
                 DashBoard
               </Link>
@@ -344,7 +351,7 @@ const Navbar = () => {
             {userContext === null ? (
               <Link
                 to="/login"
-                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 no-underline hover:bg-gray-50 rounded-md"
               >
                 Iniciar Sesión
               </Link>
@@ -355,7 +362,7 @@ const Navbar = () => {
                   navigate("/");
                   refetchUser();
                 }}
-                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 no-underline hover:bg-gray-50 rounded-md"
               >
                 Cerrar Sesión
               </Link>
