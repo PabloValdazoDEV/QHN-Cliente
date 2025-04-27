@@ -78,6 +78,16 @@ const PageHome = () => {
         }}
         />
         </div>
+             <div>
+
+      <ButtonGeneral
+  children={"Ver post"}
+  onClick={() => navigate("/post/mi-primer-post")}
+  className={"bg-blue-500 text-white"}
+  />
+
+        </div>
+        
     </div>
   );
 };
