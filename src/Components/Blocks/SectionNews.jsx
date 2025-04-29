@@ -1,4 +1,4 @@
-import CardVertical from '../Cards/CardVertical';
+import CardVertical from '../Components/Cards/CardVertical';
 
 export default function SectionNews() {
   const dummyNews = [
