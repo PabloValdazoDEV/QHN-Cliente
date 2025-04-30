@@ -9,7 +9,7 @@ export default function Footer() {
     document.getElementById("year").textContent = new Date().getFullYear();
   }, []);
 
-  const {register, error, handleSubmit } = useForm()
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
   const mutation = useMutation({
     mutationFn: (data) => {
@@ -243,29 +243,47 @@ export default function Footer() {
             <p className="text-neutral-700 mb-4">
               Suscríbete a nuestra Newsletter.
             </p>
-            <form className="mt-4" onSubmit={handleSubmit((data)=>mutation.mutate(data))}>
+            <form className="mt-4 space-y-3" onSubmit={handleSubmit((data) => mutation.mutate(data))}>
               <div className="relative">
-              <InputGeneral id={"emailNewsLetter"} name={"emailNewsLetter"} type={"email"} placeholder={"Tu Email"} {...register("emailNewsLetter", { required: true })}  />
+                <InputGeneral
+                  id={"emailNewsLetter"}
+                  name={"emailNewsLetter"}
+                  type={"email"}
+                  placeholder={"Tu Email"}
+                  {...register("emailNewsLetter", { required: true })}
+                />
                 <button
                   type="submit"
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-[color:var(--color-primary)] hover:bg-blue-600  text-white rounded-lg px-4 py-1 transition"
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-[color:var(--color-primary)] hover:bg-blue-600 text-white rounded-lg px-4 py-1 transition"
                 >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M14 5l7 7m0 0l-7 7m7-7H3"
-                    />
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
                 </button>
               </div>
+
+              <div className="flex items-start space-x-2">
+                <input
+                  type="checkbox"
+                  id="privacyPolicy"
+                  {...register("privacyPolicy", { required: "Debes aceptar la Política de Privacidad." })}
+                  className="mt-1"
+                />
+                <label htmlFor="privacyPolicy" className="text-sm text-neutral-700">
+                  Acepto la&nbsp;
+                  <Link to="/cookies" className="text-[color:var(--color-primary)] underline hover:opacity-80">
+                    Política de Privacidad
+                  </Link>
+                </label>
+              </div>
+
+              {errors.privacyPolicy && (
+                <p className="text-sm text-red-600">
+                  {errors.privacyPolicy.message}
+                </p>
+              )}
             </form>
+
           </div>
         </div>
 
