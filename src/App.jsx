@@ -19,8 +19,7 @@ import PageCategories from "./Page/PageCategories";
 import PageCities from "./Page/PageCities";
 import PageAbout from "./Page/PageAbout";
 import PageContact from "./Page/PageContact";
-import PagePost from "./Page/PagePost"; 
-
+import PagePost from "./Page/PagePost";
 
 const PublicRoute = ({ element }) => {
   const { role, loading } = useUserRole();
@@ -58,17 +57,20 @@ function App() {
           <Route element={<Layout />}>
             <Route index element={<PageHome />} />
 
-            <Route path="ciudades" element={<PageCities />} />
             <Route path="ciudades/:city" element={<PageCity />} />
+            {/* <Route path="ciudades/:city/:category" element={} /> */} Crear página
 
-            <Route path="categorias" element={<PageCategories />} />            
             <Route path="categorias/:category" element={<PageCategory />} />
 
             <Route path="sobre-nosotros" element={<PageAbout />} />
             <Route path="contacto" element={<PageContact />} />
-            
+
             <Route path="post/:postTitle" element={<PagePost />} />
 
+            <Route
+              path="politica-privacidad-&-cookies"
+              element={<h1>cookies</h1>}
+            />
             <Route
               path="login"
               element={<PublicRoute element={<PageLogin />} />}
