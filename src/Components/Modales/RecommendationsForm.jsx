@@ -15,6 +15,9 @@ export default function RecommendModal() {
     city: navbarCities[0].name
   });
 
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
+  const [privacyError, setPrivacyError] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -49,10 +52,27 @@ export default function RecommendModal() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+  
+    if (formData.email && !privacyAccepted) {
+      setPrivacyError(true);
+      return;
+    }
+  
     localStorage.setItem("recommendation_data", JSON.stringify(formData));
     localStorage.setItem("recommendation_submitted", "true");
     setIsOpen(false);
   };
+
+//  useEffect(() => {
+//    const timer = setTimeout(() => {
+//      const submitted = localStorage.getItem("recommendation_submitted");
+//      if (!submitted) {
+//        setIsOpen(true);
+//      }
+//    }, DELAY_MS);
+//  
+//    return () => clearTimeout(timer);
+//  }, []);
 
   return (
     <>
@@ -80,7 +100,7 @@ export default function RecommendModal() {
 
       {isOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto relative">
+          <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md max-h-[80vh] overflow-y-auto relative">
             <button
               onClick={() => setIsOpen(false)}
               className="absolute top-2 right-3 text-xl"
@@ -97,7 +117,7 @@ export default function RecommendModal() {
                     <div className="flex items-center gap-2">
                       <input
                         type="range"
-                        min="0"
+                        min="5"
                         max="18"
                         value={age}
                         onChange={(e) => handleAgeChange(index, e.target.value)}
@@ -156,6 +176,7 @@ export default function RecommendModal() {
                 </select>
               </div>
 
+                <label className="block font-semibold mb-1">Correo electrónico <span className="text-sm text-gray-500">(Para enviarte ideas cada semana)</span></label>
               <InputGeneral
                 type="email"
                 name="email"
@@ -164,9 +185,32 @@ export default function RecommendModal() {
                 placeholder="Correo electrónico"
                 required={false}
               />
+              {formData.email && (
+                    <div className="flex items-center space-x-2">
+                        <input
+                        type="checkbox"
+                        id="privacy"
+                        checked={privacyAccepted}
+                        onChange={(e) => {
+                            setPrivacyAccepted(e.target.checked);
+                            setPrivacyError(false);
+                        }}
+                        className="accent-[color:var(--color-primary)]"
+                        />
+                        <label htmlFor="privacy" className="text-sm text-neutral-700">
+                        Acepto la <a href="/politica-de-privacidad" target="_blank" className="text-blue-600 underline">política de privacidad</a>
+                        </label>
+                    </div>
+                    )}
+
+                    {privacyError && (
+                    <p className="text-red-500 text-sm">
+                        Debes aceptar la política de privacidad para enviar tu correo electrónico.
+                    </p>
+                    )}
 
               <ButtonGeneral type="submit" className="bg-[color:var(--color-primary)] text-white w-full">
-                Quiero recibir ideas y actividades para disfrutar en familia
+                Establecer
               </ButtonGeneral>
 
               <p className="text-sm text-neutral-600 mt-4">
