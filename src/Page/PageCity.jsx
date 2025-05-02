@@ -225,7 +225,7 @@ const PageCity = () => {
   }, [city]);
 
   return (
-    <div className="w-full max-w-7xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <div>
       {/* Encabezado */}
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold text-gray-800 mb-2">

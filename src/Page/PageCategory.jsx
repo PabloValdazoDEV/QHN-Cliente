@@ -83,7 +83,7 @@ const PageCategory = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <div>
       <h2 className="text-2xl font-bold text-gray-800 text-center mb-5">
         {category.charAt(0).toUpperCase() + category.slice(1)}
       </h2>
