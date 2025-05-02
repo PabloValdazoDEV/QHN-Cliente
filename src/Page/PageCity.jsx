@@ -5,6 +5,7 @@ import CardVerticalMini from "../Components/Cards/CardVerticalMini";
 import BannerVertical from "../Components/Banners/BannerVertical";
 import BannerHorizontal from "../Components/Banners/BannerHorizontal";
 import ButtonGeneral from "../Components/Buttons/ButtonGeneral";
+import CategoryPill from "../Components/CategoryPill";
 
 const PageCity = () => {
   // Hooks
@@ -302,9 +303,10 @@ const PageCity = () => {
                   </div>
 
                   <div className="p-4 flex flex-col flex-grow">
-                    <h4 className="text-xl font-semibold mb-2">
-                      {ciudad.nombre}
-                    </h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="text-xl font-semibold">{ciudad.nombre}</h4>
+                      <CategoryPill category={ciudad.nombre} />
+                    </div>
                     <p className="text-gray-600 mb-4 transition-colors duration-300 hover:text-gray-800">
                       {ciudad.descripcion}
                     </p>
@@ -318,9 +320,7 @@ const PageCity = () => {
                             className="border-b pb-2 last:border-b-0 transition-colors duration-300 hover:bg-gray-50 rounded"
                           >
                             <div className="p-2 rounded">
-                              <h6 className="font-medium text-blue-600">
-                                {post.title}
-                              </h6>
+                              <h6 className="font-medium text-blue-600">{post.title}</h6>
                               <p className="text-sm text-gray-500 transition-colors duration-300 hover:text-gray-700">
                                 {post.description}
                               </p>

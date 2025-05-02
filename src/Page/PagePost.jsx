@@ -7,6 +7,7 @@ import BannerHorizontal from "../Components/Banners/BannerHorizontal";
 import RelatedNews from "../Components/Blocks/RelatedNews";
 import CardVerticalMini from "../Components/Cards/CardVerticalMini";
 import ButtonGeneral from "../Components/Buttons/ButtonGeneral";
+import CategoryPill from "../Components/CategoryPill";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import InputGeneral from "../Components/Input/InputGeneral";
@@ -80,9 +81,10 @@ const PagePost = () => {
             {postData.title}
           </h1>
 
-          {/* Autor del articulo */}
-          <div className="flex items-center text-sm text-neutral-700 mb-4">
-            <svg
+          {/* Autor del articulo y categoría */}
+          <div className="flex items-center justify-between text-sm text-neutral-700 mb-4">
+            <div className="flex items-center">
+              <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-4 h-4 mr-2 text-[color:var(--color-secondary)]"
                 viewBox="0 0 24 24"
@@ -91,13 +93,14 @@ const PagePost = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-            >
+              >
                 <path d="M2 21a8 8 0 0 1 10.821-7.487m8.557 3.113a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" />
                 <circle cx="10" cy="8" r="5" />
-            </svg>
-            <span>Escrito por {postData.author}</span>
+              </svg>
+              <span>Escrito por {postData.author}</span>
             </div>
-
+            <CategoryPill category={postData.category} />
+          </div>
 
           {/* Imagen de portada (obligatoria al hacer el post) */}
           <img

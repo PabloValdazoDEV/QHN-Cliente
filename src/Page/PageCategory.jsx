@@ -5,6 +5,7 @@ import BannerVertical from "../Components/Banners/BannerVertical";
 import CardVerticalMini from "../Components/Cards/CardVerticalMini";
 import BannerHorizontal from "../Components/Banners/BannerHorizontal";
 import ButtonGeneral from "../Components/Buttons/ButtonGeneral";
+import CategoryPill from "../Components/CategoryPill";
 
 const PageCategory = () => {
   const { category } = useParams();
@@ -84,9 +85,12 @@ const PageCategory = () => {
 
   return (
     <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold text-gray-800 text-center mb-5">
-        {category.charAt(0).toUpperCase() + category.slice(1)}
-      </h2>
+      <div className="flex items-center justify-between mb-5">
+        <h2 className="text-2xl font-bold text-gray-800">
+          {category.charAt(0).toUpperCase() + category.slice(1)}
+        </h2>
+        <CategoryPill category={category.charAt(0).toUpperCase() + category.slice(1)} />
+      </div>
       <p className="text-gray-600 text-center mb-5">
         Conoce las noticias de {category} más importantes
       </p>

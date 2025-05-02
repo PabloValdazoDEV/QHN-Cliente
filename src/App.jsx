@@ -1,4 +1,5 @@
-import { Navigate, Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router-dom";
+
 import { useEffect } from "react";
 import { useSetAtom } from "jotai";
 import { fetchUser } from "./Context/User";
@@ -6,6 +7,8 @@ import { useUserRole } from "./Hooks/useUserRole";
 
 import PageHome from "./Page/PageHome";
 import PageLogin from "./Page/PageLogin";
+import RegisterPage from "./Page/RegisterPage";
+import CompanyRegister from "./Page/CompanyRegister";
 
 import PageAdmin from "./Page/PageAdmin";
 import PageCollaborator from "./Page/PageCollaborator";
@@ -20,7 +23,7 @@ import PageCities from "./Page/PageCities";
 import PageAbout from "./Page/PageAbout";
 import PageContact from "./Page/PageContact";
 import PagePost from "./Page/PagePost";
-
+import PagePrivacy from "./Page/PagePrivacy";
 const PublicRoute = ({ element }) => {
   const { role, loading } = useUserRole();
   if (loading) return <div>Cargando...</div>;
@@ -68,12 +71,20 @@ function App() {
             <Route path="post/:postTitle" element={<PagePost />} />
 
             <Route
-              path="politica-privacidad-&-cookies"
-              element={<h1>cookies</h1>}
+              path="politica-privacidad-cookies"
+              element={<PagePrivacy />}
             />
             <Route
               path="login"
               element={<PublicRoute element={<PageLogin />} />}
+            />
+            <Route
+              path="registro"
+              element={<PublicRoute element={<RegisterPage />} />}
+            />
+            <Route
+              path="company-register"
+              element={<CompanyRegister />}
             />
             <Route
               path="admin"

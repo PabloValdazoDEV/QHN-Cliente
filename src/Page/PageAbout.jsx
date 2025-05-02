@@ -9,42 +9,30 @@ const PageAbout = () => {
         <section>
           <h3 className="text-xl font-semibold text-gray-800 mb-3">Nuestra Misión</h3>
           <p className="text-gray-600">
-            En QHN, nos dedicamos a conectar a profesionales cualificados con clientes que necesitan servicios de calidad.
-            Nuestra plataforma facilita la búsqueda y contratación de servicios profesionales de manera rápida y segura.
+          En https://www.quehacerconlosninos.es, creemos que cada etapa de la infancia y adolescencia merece ser vivida con alegría, descubrimiento y bienestar. Nuestra misión es conectar a las familias con experiencias únicas que nutran el cuerpo, la mente y el corazón de los niños y jóvenes, desde su primer día de vida hasta su mayoría de edad. Reunimos en un solo lugar los mejores eventos de ocio, salud, estilo de vida, viajes y shopping para que cada momento sea una oportunidad de crecimiento y conexión.
           </p>
         </section>
 
         <section>
           <h3 className="text-xl font-semibold text-gray-800 mb-3">¿Por qué elegirnos?</h3>
           <ul className="list-disc list-inside space-y-2 text-gray-600">
-            <li>Profesionales verificados y con experiencia</li>
-            <li>Sistema de valoraciones y reseñas transparente</li>
-            <li>Proceso de contratación seguro y sencillo</li>
-            <li>Atención al cliente 24/7</li>
-            <li>Garantía de satisfacción en todos nuestros servicios</li>
+            <li>Bienestar Integral: Promovemos actividades que cuidan la salud física, emocional y mental de niños y adolescentes.</li>
+            <li>Diversión con Propósito: Creemos que el juego y el ocio son herramientas poderosas de aprendizaje y desarrollo.</li>
+            <li>Inclusividad: Celebramos la diversidad de intereses, edades y necesidades, ofreciendo opciones para todas las familias.</li>
+            <li>Confianza y Seguridad: Seleccionamos cada evento con responsabilidad, priorizando la calidad, seguridad y valor educativo.</li>
+            <li>Innovación y Actualización: Nos mantenemos al día con las mejores propuestas para ofrecer siempre contenido fresco, creativo y útil.</li>
           </ul>
         </section>
 
         <section>
-          <h3 className="text-xl font-semibold text-gray-800 mb-3">Nuestros Valores</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-4 bg-blue-50 rounded-lg">
-              <h4 className="font-semibold text-blue-800 mb-2">Calidad</h4>
-              <p className="text-gray-600">Nos comprometemos a ofrecer servicios de la más alta calidad.</p>
-            </div>
-            <div className="p-4 bg-blue-50 rounded-lg">
-              <h4 className="font-semibold text-blue-800 mb-2">Transparencia</h4>
-              <p className="text-gray-600">Mantenemos una comunicación clara y honesta con nuestros usuarios.</p>
-            </div>
-            <div className="p-4 bg-blue-50 rounded-lg">
-              <h4 className="font-semibold text-blue-800 mb-2">Innovación</h4>
-              <p className="text-gray-600">Buscamos constantemente mejorar nuestra plataforma y servicios.</p>
-            </div>
-            <div className="p-4 bg-blue-50 rounded-lg">
-              <h4 className="font-semibold text-blue-800 mb-2">Compromiso</h4>
-              <p className="text-gray-600">Trabajamos para satisfacer las necesidades de nuestros usuarios.</p>
-            </div>
-          </div>
+          <h3 className="text-xl font-semibold text-gray-800 mb-3">Por que elegirnos</h3>
+        
+          <p className="text-gray-600">
+          Porque entendemos lo que significa encontrar el equilibrio entre entretenimiento, salud y desarrollo para los más pequeños de la casa. En un mundo lleno de opciones, nosotros filtramos lo mejor para que tú solo te enfoques en disfrutar.
+          Con https://www.quehacerconlosninos.es, no solo encuentras eventos: encuentras momentos que quedarán en la memoria de tus hijos, experiencias que construyen vínculos, y oportunidades para descubrir el mundo en cada etapa.
+          Somos tu aliado en la búsqueda de una infancia feliz, activa y significativa.
+          </p>
+          
         </section>
       </div>
     </div>

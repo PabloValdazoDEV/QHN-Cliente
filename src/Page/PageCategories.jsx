@@ -1,4 +1,5 @@
 import React from 'react';
+import CategoryPill from '../Components/CategoryPill';
 
 const PageCategories = () => {
   const categories = [
@@ -21,7 +22,7 @@ const PageCategories = () => {
           >
             <div className="flex items-center space-x-3">
               <span className="text-2xl">{category.icon}</span>
-              <h3 className="text-lg font-semibold text-gray-800">{category.name}</h3>
+              <CategoryPill category={category.name} />
             </div>
           </div>
         ))}

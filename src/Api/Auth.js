@@ -32,7 +32,7 @@ const tryLogout = async () => {
 
 const tryMe = async (token) => {
   try {
-    const response = await api.get("/me", {
+    const response = await api.get("/auth/me", {
       headers: {
         Authorization: `Bearer ${token}`,
       },

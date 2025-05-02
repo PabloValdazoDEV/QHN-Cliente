@@ -1,117 +1,120 @@
-import React, { useState } from 'react';
+import React from 'react';
+import ContactForm from '../Components/Forms/ContactForm';
+import MapLocation from '../Components/Maps/MapLocation';
 
 const PageContact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Aquí iría la lógica para enviar el formulario
-    console.log('Formulario enviado:', formData);
-  };
-
   return (
-    <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6">Contáctanos</h2>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div>
-          <h3 className="text-xl font-semibold text-gray-800 mb-4">Información de Contacto</h3>
-          <div className="space-y-4">
-            <div>
-              <h4 className="font-semibold text-gray-700">Dirección</h4>
-              <p className="text-gray-600">Av. Principal #123, Ciudad</p>
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Contacta con Nosotros</h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Estamos aquí para ayudarte. Envíanos un mensaje y te responderemos lo antes posible.
+          </p>
+        </div>
+        
+        <div className="space-y-12">
+          {/* Primera fila: Información de contacto y formulario */}
+          <div className="grid grid-cols-1 lg:grid-cols-10 gap-8">
+            {/* Información de contacto (30%) */}
+            <div className="lg:col-span-3 bg-white rounded-2xl shadow-xl p-8">
+              <h3 className="text-xl font-semibold text-gray-900 mb-6">Información de Contacto</h3>
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <div className="flex-shrink-0">
+                    <svg className="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <h4 className="text-lg font-medium text-gray-900">Dirección</h4>
+                    <p className="mt-1 text-gray-600">C/Carlos Dabán, 26</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <div className="flex-shrink-0">
+                    <svg className="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <h4 className="text-lg font-medium text-gray-900">Teléfono</h4>
+                    <p className="mt-1 text-gray-600">624 02 91 89</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <div className="flex-shrink-0">
+                    <svg className="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <h4 className="text-lg font-medium text-gray-900">Email</h4>
+                    <div className="mt-1 space-y-1">
+                      <p className="text-gray-600">General: info@qhn.es</p>
+                      <p className="text-gray-600">Marketing y comercial: publicidad@qhn.es</p>
+                      <p className="text-gray-600">Redacción: redaccion@qhn.es</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-              <h4 className="font-semibold text-gray-700">Teléfono</h4>
-              <p className="text-gray-600">+123 456 7890</p>
-            </div>
-            <div>
-              <h4 className="font-semibold text-gray-700">Email</h4>
-              <p className="text-gray-600">contacto@qhn.com</p>
-            </div>
-            <div>
-              <h4 className="font-semibold text-gray-700">Horario de Atención</h4>
-              <p className="text-gray-600">Lunes a Viernes: 9:00 - 18:00</p>
-              <p className="text-gray-600">Sábados: 9:00 - 14:00</p>
+
+            {/* Formulario de contacto (70%) */}
+            <div className="lg:col-span-7 bg-white rounded-2xl shadow-xl p-8">
+              <ContactForm />
             </div>
           </div>
-        </div>
 
-        <div>
-          <h3 className="text-xl font-semibold text-gray-800 mb-4">Envíanos un Mensaje</h3>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nombre</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                required
-              />
+          {/* Segunda fila: Mapa y Newsletter */}
+          <div className="grid grid-cols-1 lg:grid-cols-10 gap-8">
+            {/* Mapa (70%) */}
+            <div className="lg:col-span-7 bg-white rounded-2xl shadow-xl p-8">
+              <MapLocation />
             </div>
 
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                required
-              />
+            {/* Newsletter (30%) */}
+            <div className="lg:col-span-3 bg-white rounded-2xl shadow-xl p-8">
+              <div className="text-center">
+                <h3 className="text-2xl font-semibold text-gray-900 mb-4">Suscríbete a nuestra newsletter</h3>
+                <p className="text-gray-600 mb-6">
+                  Mantente informado sobre las últimas noticias y actualizaciones de QHN.
+                </p>
+              </div>
+              <form className="space-y-6">
+                <div>
+                  <label htmlFor="newsletterEmail" className="block text-sm font-medium text-gray-700 mb-2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="newsletterEmail"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+                    placeholder="Escribe aquí tu email"
+                  />
+                </div>
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="privacyPolicy"
+                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <label htmlFor="privacyPolicy" className="ml-2 block text-sm text-gray-700">
+                    Acepto las políticas de privacidad
+                  </label>
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                >
+                  Suscribirse
+                </button>
+              </form>
             </div>
-
-            <div>
-              <label htmlFor="subject" className="block text-sm font-medium text-gray-700">Asunto</label>
-              <input
-                type="text"
-                id="subject"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                required
-              />
-            </div>
-
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700">Mensaje</label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                rows="4"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                required
-              ></textarea>
-            </div>
-
-            <button
-              type="submit"
-              className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-            >
-              Enviar Mensaje
-            </button>
-          </form>
+          </div>
         </div>
       </div>
     </div>
