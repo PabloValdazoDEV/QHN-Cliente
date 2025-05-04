@@ -123,9 +123,10 @@ try {
 }
 }
 
-const getAllEventosUser = async () =>{
+const getAllEventosUser = async (category = null) => {
   try {
-    const response = await api.get(`/api/eventos/user`);
+    const params = category ? { category } : {};
+    const response = await api.get(`/api/eventos/user`, { params });
     return response.data;
   } catch (error) {
     return {
