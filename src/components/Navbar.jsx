@@ -4,6 +4,24 @@ import { Link, useNavigate } from "react-router-dom";
 import { fetchUser, user } from "../Context/User";
 import { tryLogout } from "../Api/Auth";
 
+export const categories = [
+  { name: "Ocio", path: "/categorias/ocio" },
+  { name: "Viajes", path: "/categorias/viajes" },
+  { name: "Shopping", path: "/categorias/shopping" },
+  { name: "Educación", path: "/categorias/educacion" },
+  { name: "Salud", path: "/categorias/salud" },
+  { name: "Estilo de vida", path: "/categorias/estilo-de-vida" },
+];
+
+export const cities = [
+  { name: "Madrid", path: "/ciudades/madrid" },
+  { name: "Málaga", path: "/ciudades/malaga" },
+  { name: "Valencia", path: "/ciudades/valencia" },
+  { name: "Barcelona", path: "/ciudades/barcelona" },
+  { name: "Sevilla", path: "/ciudades/sevilla" },
+  { name: "Zaragoza", path: "/ciudades/zaragoza" },
+];
+
 const Navbar = () => {
   const navegate = useNavigate();
   const [userContext] = useAtom(user);
@@ -349,10 +367,7 @@ const Navbar = () => {
             )}
 
             {userContext === null ? (
-              <Link
-                to="/login"
-                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 no-underline hover:bg-gray-50 rounded-md"
-              >
+              <Link to="/login" className="text-gray-700 hover:text-blue-600 no-underline">
                 Iniciar Sesión
               </Link>
             ) : (

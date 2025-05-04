@@ -33,7 +33,6 @@ export default function PageCreateEvent() {
   const [htmlContent, setHtmlContent] = useState("");
   const [mainImageUrl, setMainImageUrl] = useState("");
   const [uploading, setUploading] = useState(false);
-  const [showModal, setShowModal] = useState(false);
 
   const categorias = [
     "Ocio",
@@ -110,7 +109,7 @@ export default function PageCreateEvent() {
       JSON.stringify(payload)
     );
     if (dataResponse.message === "Evento guardado") {
-      return navigate("/");
+      return navigate("/dashboard");
     } else {
       alert("Error al guardar el evento");
       return;
@@ -118,16 +117,9 @@ export default function PageCreateEvent() {
   };
 
   return (
-    <div className="space-y-4 mx-auto p-4">
-      <ButtonGeneral
-      className="bg-gray-500 hover:bg-gray-600"
-        children="Volver"
-        onClick={() => {
-          setShowModal(true);
-        }}
-      />
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 " >
-        <h1 className="text-2xl font-bold mb-4">Crear nuevo evento</h1>
+    <div className="mt-12">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" >
+      <h2 className="text-2xl font-bold mb-6">Crear nuevo evento</h2>
 
         <div className="flex flex-row gap-5">
           <div className="flex flex-col gap-2 w-full">
@@ -276,19 +268,6 @@ export default function PageCreateEvent() {
         )}
         
       </form>
-      {showModal && (
-          <Modal
-            children={"Se perdar cualquier cambio aplicado"}
-            btn_left_onClick={() => setShowModal(null)}
-            btn_left_text="Quedarme"
-            btn_right_onClick={() => {
-              navigate(-1);
-              setShowModal(null);
-            }}
-            btn_right_text="Salir"
-            btn_right_className="hover:bg-red-600"
-          />
-        )}
     </div>
   );
 }
