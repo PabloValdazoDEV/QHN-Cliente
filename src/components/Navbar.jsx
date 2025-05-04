@@ -367,10 +367,7 @@ const Navbar = () => {
             )}
 
             {userContext === null ? (
-              <Link
-                to="/login"
-                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 no-underline hover:bg-gray-50 rounded-md"
-              >
+              <Link to="/login" className="text-gray-700 hover:text-blue-600 no-underline">
                 Iniciar Sesión
               </Link>
             ) : (

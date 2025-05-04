@@ -123,6 +123,53 @@ try {
 }
 }
 
+const getAllEventosUser = async () =>{
+  try {
+    const response = await api.get(`/api/eventos/user`);
+    return response.data;
+  } catch (error) {
+    return {
+      success: false,
+      message: error.response?.data?.message || "Error de red",
+    };
+  }
+}
+const getAllEventosUserLast = async () =>{
+  try {
+    const response = await api.get(`/api/eventos/user/last`);
+    return response.data;
+  } catch (error) {
+    return {
+      success: false,
+      message: error.response?.data?.message || "Error de red",
+    };
+  }
+}
+
+const getEventosUser = async () =>{
+  try {
+    const response = await api.get(`/api/eventos/user`);
+    return response.data;
+  } catch (error) {
+    return {
+      success: false,
+      message: error.response?.data?.message || "Error de red",
+    };
+  }
+}
+
+const getEventosSlug = async (city, category, name) =>{
+  try {
+    const response = await api.get(`/api/eventos/event/${city}/${category}/${name}`);
+    return response.data;
+  } catch (error) {
+    return {
+      success: false,
+      message: error.response?.data?.message || "Error de red",
+    };
+  }
+}
+
 export {
   eventUploadImage,
   eventUpload,
@@ -131,5 +178,9 @@ export {
   eventUpdate,
   deleteEvent,
   updateEventVerified,
-  getAllEventosCollaborator
+  getAllEventosCollaborator,
+  getAllEventosUser,
+  getEventosUser,
+  getAllEventosUserLast,
+  getEventosSlug
 };

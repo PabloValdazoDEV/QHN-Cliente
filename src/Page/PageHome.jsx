@@ -5,13 +5,25 @@ import CardVerticalMini from "../Components/Cards/CardVerticalMini";
 import BannerVertical from "../Components/Banners/BannerVertical";
 import BannerHorizontal from "../Components/Banners/BannerHorizontal";
 import ButtonGeneral from "../Components/Buttons/ButtonGeneral";
+import { useQuery } from "@tanstack/react-query";
+import { getAllEventosUser } from "../Api/Eventos";
 
 const PageHome = () => {
   const navigate = useNavigate();
 
+  const {
+    data: eventPrimary,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["allEventUser"],
+    queryFn: getAllEventosUser,
+  });
+
+
   // Estados
   const [masNoticias, setMasNoticias] = useState(1);
-  const [ultimoPost, setUltimoPost] = useState(null);
+  // const [ultimoPost, setUltimoPost] = useState(null);
   const [ciudades, setCiudades] = useState([]);
 
   // Datos de ejemplo para noticias y banners
@@ -157,51 +169,54 @@ const PageHome = () => {
   ];
 
   // Generación de noticias
-  const noticiasOcios = Array.from({ length: 9 }, (_, i) =>
-    i === 0 ? (
-      <CardVertical
-        key={i}
-        title={infoNoticias.title}
-        description={infoNoticias.description.slice(0, 100) + "..."}
-        link={infoNoticias.link}
-        image={infoNoticias.image}
-      />
-    ) : (
-      <CardVerticalMini
-        key={i}
-        title={infoNoticias.title}
-        description={infoNoticias.description.slice(0, 30) + "..."}
-        link={infoNoticias.link}
-        image={infoNoticias.image}
-      />
+  const noticias = Array.isArray(eventPrimary)
+  ? eventPrimary.map((event, index) =>
+      index === 0 ? (
+        <CardVertical
+          key={index}
+          title={event.nombre_evento}
+          description={event.content.replace(/<[^>]*>?/gm, '').slice(0, 100) + "..."}
+          link={"post/" + event.slug}
+          image={event.image}
+        />
+      ) : (
+        <CardVerticalMini
+          key={index}
+          title={event.nombre_evento}
+          description={event.content.replace(/<[^>]*>?/gm, '').slice(0, 30) + "..."}
+          link={"post/" + event.slug}
+          image={event.image}
+        />
+      )
     )
-  );
+  : [];
 
-  const masNoticiasOcios = Array.from({ length: 8 * masNoticias }, (_, i) => (
-    <CardVerticalMini
-      key={i}
-      title={infoNoticias.title}
-      description={infoNoticias.description.slice(0, 30) + "..."}
-      link={infoNoticias.link}
-      image={infoNoticias.image}
-    />
-  ));
+
+  // const masnoticias = Array.from({ length: 8 * masNoticias }, (_, i) => (
+  //   <CardVerticalMini
+  //     key={i}
+  //     title={infoNoticias.title}
+  //     description={infoNoticias.description.slice(0, 30) + "..."}
+  //     link={infoNoticias.link}
+  //     image={infoNoticias.image}
+  //   />
+  // ));
 
   // Función para obtener un post aleatorio
-  const obtenerUltimoPostAleatorio = () => {
-    const todosLosPosts = ciudadesEjemplo.flatMap((ciudad) =>
-      ciudad.posts.map((post) => ({
-        ...post,
-        ciudad: ciudad.nombre,
-      }))
-    );
-    return todosLosPosts[Math.floor(Math.random() * todosLosPosts.length)];
-  };
+  // const obtenerUltimoPostAleatorio = () => {
+  //   const todosLosPosts = ciudadesEjemplo.flatMap((ciudad) =>
+  //     ciudad.posts.map((post) => ({
+  //       ...post,
+  //       ciudad: ciudad.nombre,
+  //     }))
+  //   );
+  //   return todosLosPosts[Math.floor(Math.random() * todosLosPosts.length)];
+  // };
 
-  // Efecto para actualizar el último post
-  useEffect(() => {
-    setUltimoPost(obtenerUltimoPostAleatorio());
-  }, []);
+  // // Efecto para actualizar el último post
+  // useEffect(() => {
+  //   setUltimoPost(obtenerUltimoPostAleatorio());
+  // }, []);
 
   return (
     <div>
@@ -214,8 +229,11 @@ const PageHome = () => {
       </p>
 
       <div className="flex flex-col gap-10">
+        <div className="w-full">
+          <BannerHorizontal {...infoBannerOcio} />
+        </div>
         {/* Banner Principal */}
-        {ultimoPost && (
+        {/* {ultimoPost && (
           <div className="w-full">
             <BannerHorizontal
               image={ultimoPost.image}
@@ -224,22 +242,30 @@ const PageHome = () => {
               textButton="Ver más"
             />
           </div>
-        )}
+        )} */}
 
         {/* Sección de Noticias y Banner Vertical */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
-          <div className="col-span-1 md:col-span-3">
-            {noticiasOcios[0]}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
-              {noticiasOcios.slice(1, 9)}
+        {error ? (
+          <div>Error: {error.message}</div>
+        ) : isLoading ? (
+          <div>Cargando eventos...</div>
+        ) : (
+          eventPrimary && (
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
+              <div className="col-span-1 md:col-span-3">
+                {noticias[0]}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
+                  {noticias.slice(1, 9)}
+                </div>
+              </div>
+              <div className="col-span-1 relative hidden md:block">
+                <div className="sticky top-1/6 w-full">
+                  <BannerVertical {...infoBannerOcio} />
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="col-span-1 relative hidden md:block">
-            <div className="sticky top-1/6 w-full">
-              <BannerVertical {...infoBannerOcio} />
-            </div>
-          </div>
-        </div>
+          )
+        )}
 
         {/* Banner Secundario */}
         <div className="w-full">
@@ -319,19 +345,6 @@ const PageHome = () => {
       {/* Banner Secundario Final */}
       <div className="w-full mt-10">
         <BannerHorizontal {...infoBannerOcio} />
-      </div>
-
-      <div className="mt-6">
-        <ButtonGeneral
-          children={"Ver post"}
-          onClick={() => {
-            navigate("/post/mi-primer-post");
-            window.scrollTo(0, 0);
-          }}
-          className={
-            "bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300"
-          }
-        />
       </div>
     </div>
   );

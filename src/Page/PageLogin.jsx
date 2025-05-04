@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { tryLogin } from "../Api/Auth";
+import { tryLogin, tryMe } from "../Api/Auth";
 import { useNavigate } from "react-router";
 import { useSetAtom } from "jotai";
 import { fetchUser } from "../Context/User";
@@ -23,7 +23,7 @@ const PageLogin = () => {
   const mutation = useMutation({
     mutationFn: async (data) => {
       const reponse = await tryLogin(data);
-      if (reponse.message === "Login successful") {
+      if (reponse.message === "Login successful" && reponse.token) {
         reset();
         navigate("/dashboard");
         refetchUser();

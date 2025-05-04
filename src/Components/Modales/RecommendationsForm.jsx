@@ -12,7 +12,7 @@ export default function RecommendModal() {
     email: "",
     interests: [],
     childrenAges: [5],
-    city: navbarCities[0].name
+    city: navbarCities[0].name,
   });
 
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
@@ -27,7 +27,7 @@ export default function RecommendModal() {
     if (formData.childrenAges.length < 5) {
       setFormData({
         ...formData,
-        childrenAges: [...formData.childrenAges, 5]
+        childrenAges: [...formData.childrenAges, 5],
       });
     }
   };
@@ -35,7 +35,9 @@ export default function RecommendModal() {
   const handleRemoveChild = (indexToRemove) => {
     setFormData({
       ...formData,
-      childrenAges: formData.childrenAges.filter((_, index) => index !== indexToRemove)
+      childrenAges: formData.childrenAges.filter(
+        (_, index) => index !== indexToRemove
+      ),
     });
   };
 
@@ -46,33 +48,38 @@ export default function RecommendModal() {
   };
 
   const handleInterestsChange = (e) => {
-    const selectedOptions = Array.from(e.target.selectedOptions, option => option.value);
+    const selectedOptions = Array.from(
+      e.target.selectedOptions,
+      (option) => option.value
+    );
     setFormData({ ...formData, interests: selectedOptions });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     if (formData.email && !privacyAccepted) {
       setPrivacyError(true);
       return;
     }
-  
+
     localStorage.setItem("recommendation_data", JSON.stringify(formData));
     localStorage.setItem("recommendation_submitted", "true");
     setIsOpen(false);
   };
 
-//  useEffect(() => {
-//    const timer = setTimeout(() => {
-//      const submitted = localStorage.getItem("recommendation_submitted");
-//      if (!submitted) {
-//        setIsOpen(true);
-//      }
-//    }, DELAY_MS);
-//  
-//    return () => clearTimeout(timer);
-//  }, []);
+  // useEffect(() => {
+  //   if (localStorage.getItem("cookie_consent")) {
+  //     const timer = setTimeout(() => {
+  //       const submitted = localStorage.getItem("recommendation_submitted");
+  //       if (!submitted) {
+  //         setIsOpen(true);
+  //       }
+  //     }, DELAY_MS);
+
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, []);
 
   return (
     <>
@@ -110,10 +117,17 @@ export default function RecommendModal() {
             <h2 className="text-lg font-bold mb-4">¿Qué te interesa?</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <p className="font-semibold mb-2">¿Qué edades tienen tus hijos? <span className="text-sm text-gray-500">(Ayúdanos a enviarte contenidos adecuados para tu familia)</span></p>
+                <p className="font-semibold mb-2">
+                  ¿Qué edades tienen tus hijos?{" "}
+                  <span className="text-sm text-gray-500">
+                    (Ayúdanos a enviarte contenidos adecuados para tu familia)
+                  </span>
+                </p>
                 {formData.childrenAges.map((age, index) => (
                   <div key={index} className="mb-3">
-                    <label className="text-sm font-medium block mb-1">Hijo {index + 1}: {age} años</label>
+                    <label className="text-sm font-medium block mb-1">
+                      Hijo {index + 1}: {age} años
+                    </label>
                     <div className="flex items-center gap-2">
                       <input
                         type="range"
@@ -137,46 +151,72 @@ export default function RecommendModal() {
                   </div>
                 ))}
                 {formData.childrenAges.length < 5 && (
-                  <ButtonGeneral onClick={handleAddChild} className="mt-2 text-sm text-blue-600">
+                  <ButtonGeneral
+                    onClick={handleAddChild}
+                    className="mt-2 text-sm text-blue-600"
+                  >
                     Añadir otro hijo
                   </ButtonGeneral>
                 )}
               </div>
 
               <div>
-                <label className="block font-semibold mb-1">¿En qué ciudad vives?</label>
+                <label className="block font-semibold mb-1">
+                  ¿En qué ciudad vives?
+                </label>
                 <select
-  name="city"
-  value={formData.city}
-  onChange={handleChange}
-  className="w-full bg-gray-100 border border-neutral-200 rounded-lg py-3 px-4 text-neutral-700 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]"
->
-  {navbarCities.map((c) => (
-    <option
-      key={c.name}
-      value={c.name}>
-      {c.name}
-    </option>
-  ))}
-</select>
-              </div>
-
-              <div>
-                <label className="block font-semibold mb-1">¿Qué tipo de contenidos te interesan? <span className="text-sm text-gray-500">(Puedes elegir varios)</span></label>
-                <select
-                  name="interests"
-                  multiple
-                  value={formData.interests}
-                  onChange={handleInterestsChange}
-                  className="w-full border p-2 rounded h-32 accent-[color:var(--color-primary)]"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                  className="w-full bg-gray-100 border border-neutral-200 rounded-lg py-3 px-4 text-neutral-700 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]"
                 >
-                  {navbarCategories.map((cat) => (
-                    <option key={cat.name} value={cat.name} >{cat.name}</option>
+                  {navbarCities.map((c) => (
+                    <option key={c.name} value={c.name}>
+                      {c.name}
+                    </option>
                   ))}
                 </select>
               </div>
+              <div>
+                <label className="block font-semibold mb-1">
+                  ¿Qué tipo de contenidos te interesan?{" "}
+                  <span className="text-sm text-gray-500">
+                    (Puedes elegir varios)
+                  </span>
+                </label>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  {navbarCategories.map((cat) => {
+                    const selected = formData.interests.includes(cat.name);
+                    return (
+                      <button
+                        key={cat.name}
+                        type="button"
+                        onClick={() => {
+                          const newInterests = selected
+                            ? formData.interests.filter((i) => i !== cat.name)
+                            : [...formData.interests, cat.name];
+                          setFormData({ ...formData, interests: newInterests });
+                        }}
+                        className={`w-full py-2 px-3 rounded-lg border text-sm font-medium transition 
+            ${
+              selected
+                ? "bg-[color:var(--color-primary)] text-white border-[color:var(--color-primary)]"
+                : "bg-white text-gray-700 border-gray-300 hover:border-[color:var(--color-primary)] hover:text-[color:var(--color-primary)]"
+            }`}
+                      >
+                        {cat.name}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
 
-                <label className="block font-semibold mb-1">Correo electrónico <span className="text-sm text-gray-500">(Para enviarte ideas cada semana)</span></label>
+              <label className="block font-semibold mb-1">
+                Correo electrónico{" "}
+                <span className="text-sm text-gray-500">
+                  (Para enviarte ideas cada semana)
+                </span>
+              </label>
               <InputGeneral
                 type="email"
                 name="email"
@@ -186,35 +226,49 @@ export default function RecommendModal() {
                 required={false}
               />
               {formData.email && (
-                    <div className="flex items-center space-x-2">
-                        <input
-                        type="checkbox"
-                        id="privacy"
-                        checked={privacyAccepted}
-                        onChange={(e) => {
-                            setPrivacyAccepted(e.target.checked);
-                            setPrivacyError(false);
-                        }}
-                        className="accent-[color:var(--color-primary)]"
-                        />
-                        <label htmlFor="privacy" className="text-sm text-neutral-700">
-                        Acepto la <a href="/politica-de-privacidad" target="_blank" className="text-blue-600 underline">política de privacidad</a>
-                        </label>
-                    </div>
-                    )}
+                <div className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    id="privacy"
+                    checked={privacyAccepted}
+                    onChange={(e) => {
+                      setPrivacyAccepted(e.target.checked);
+                      setPrivacyError(false);
+                    }}
+                    className="accent-[color:var(--color-primary)]"
+                  />
+                  <label htmlFor="privacy" className="text-sm text-neutral-700">
+                    Acepto la{" "}
+                    <a
+                      href="/politica-de-privacidad"
+                      target="_blank"
+                      className="text-blue-600 underline"
+                    >
+                      política de privacidad
+                    </a>
+                  </label>
+                </div>
+              )}
 
-                    {privacyError && (
-                    <p className="text-red-500 text-sm">
-                        Debes aceptar la política de privacidad para enviar tu correo electrónico.
-                    </p>
-                    )}
+              {privacyError && (
+                <p className="text-red-500 text-sm">
+                  Debes aceptar la política de privacidad para enviar tu correo
+                  electrónico.
+                </p>
+              )}
 
-              <ButtonGeneral type="submit" className="bg-[color:var(--color-primary)] text-white w-full">
+              <ButtonGeneral
+                type="submit"
+                className="bg-[color:var(--color-primary)] text-white w-full"
+              >
                 Establecer
               </ButtonGeneral>
 
               <p className="text-sm text-neutral-600 mt-4">
-                Únete a cientos de familias que ya reciben cada semana nuestras ideas de ocio familiar, actividades para niños de todas las edades, planes gratuitos, recetas saludables y más. ¡Te ayudamos a disfrutar más tiempo de calidad con tus hijos!
+                Únete a cientos de familias que ya reciben cada semana nuestras
+                ideas de ocio familiar, actividades para niños de todas las
+                edades, planes gratuitos, recetas saludables y más. ¡Te ayudamos
+                a disfrutar más tiempo de calidad con tus hijos!
               </p>
             </form>
           </div>
