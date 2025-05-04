@@ -8,24 +8,26 @@ import PageHome from "./Page/PageHome";
 import PageLogin from "./Page/PageLogin";
 
 import PageAdmin from "./Page/PageAdmin";
-import PageCollaborator from "./Page/PageCollaborator";
+import PageCollaborator from "./Page/PageDashboard";
 import PageCategory from "./Page/PageCategory";
 import PageCity from "./Page/PageCity";
 
 import Layout from "./Components/Layout";
 
 import "./global.css";
-import PageCategories from "./Page/PageCategories";
-import PageCities from "./Page/PageCities";
 import PageAbout from "./Page/PageAbout";
 import PageContact from "./Page/PageContact";
 import PagePost from "./Page/PagePost";
+import PageEvento from "./Page/PageEvento";
+import PageCreateEvent from "./Page/PageCreateEvent";
+import PageDashBoardEventos from "./Page/PageDashBoardEventos";
+import PageEditarEvent from "./Page/PageEditarEvent";
+import PageDashboard from "./Page/PageDashboard";
 
 const PublicRoute = ({ element }) => {
   const { role, loading } = useUserRole();
   if (loading) return <div>Cargando...</div>;
-  if (role === "ADMIN") return <Navigate to="/admin" />;
-  if (role === "COLLABORATOR") return <Navigate to="/collaborator" />;
+  if (role === "ADMIN" || role === "COLLABORATOR") return <Navigate to="/dashboard" />;
   return element;
 };
 
@@ -40,6 +42,13 @@ const CollaboratorRouter = ({ element }) => {
   const { role, loading } = useUserRole();
   if (loading) return <div>Cargando...</div>;
   if (role === "COLLABORATOR") return element;
+  return <Navigate to="/" />;
+};
+
+const CollaboratorAndAdminRouter = ({ element }) => {
+  const { role, loading } = useUserRole();
+  if (loading) return <div>Cargando...</div>;
+  if (role === "COLLABORATOR" || role === "ADMIN") return element;
   return <Navigate to="/" />;
 };
 
@@ -67,6 +76,9 @@ function App() {
 
             <Route path="post/:postTitle" element={<PagePost />} />
 
+            <Route path="eventos" element={<PageEvento />} />
+            {/* <Route path="crear-evento" element={<PageCreateEvent />} /> */}
+
             <Route
               path="politica-privacidad-&-cookies"
               element={<h1>cookies</h1>}
@@ -76,12 +88,21 @@ function App() {
               element={<PublicRoute element={<PageLogin />} />}
             />
             <Route
-              path="admin"
-              element={<AdminRouter element={<PageAdmin />} />}
+              path="dashboard/eventos"
+              element={<CollaboratorAndAdminRouter element={<PageDashBoardEventos />} />}
             />
             <Route
-              path="collaborator"
-              element={<CollaboratorRouter element={<PageCollaborator />} />}
+              path="dashboard/evento/:id"
+              element={<AdminRouter element={<PageEditarEvent />} />}
+            />
+            <Route
+              path="dashboard"
+              element={<CollaboratorAndAdminRouter element={<PageDashboard />} />}
+            />
+
+            <Route
+              path="crear-evento"
+              element={<CollaboratorAndAdminRouter element={<PageCreateEvent />} />}
             />
           </Route>
         </Route>

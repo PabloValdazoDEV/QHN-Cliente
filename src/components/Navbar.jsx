@@ -194,7 +194,7 @@ const Navbar = () => {
 
             {userContext && (
               <Link
-                to={`/${userContext.role.toLowerCase()}`}
+                to="/dashboard"
                 className="text-gray-700 hover:text-blue-600 no-underline"
               >
                 DashBoard
@@ -359,7 +359,7 @@ const Navbar = () => {
 
             {userContext && (
               <Link
-                to={`/${userContext.role.toLowerCase()}`}
+                to="/dashboard"
                 className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 no-underline hover:bg-gray-50 rounded-md"
               >
                 DashBoard

@@ -82,7 +82,7 @@ export default function BannerCookies() {
           />
           <ButtonGeneral
             children={"Ver Políticas"}
-            className={"w-full bg-gray-200 shadow-lg text-black col-span-2 md:col-span1"}
+            className={"w-full bg-gray-200 shadow-lg text-black col-span-2 md:col-span-1"}
             onClick={() => navigate("/politica-privacidad-&-cookies")}
           />
         </div>
