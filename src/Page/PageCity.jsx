@@ -226,7 +226,7 @@ const PageCity = () => {
   }, [city]);
 
   return (
-    <div className="w-full max-w-7xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <div>
       {/* Encabezado */}
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold text-gray-800 mb-2">
@@ -285,7 +285,7 @@ const PageCity = () => {
           <h3 className="text-2xl font-bold text-gray-800 text-center">
             Categorias
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
             {ciudadesEjemplo.map((ciudad, index) => (
               <Link
                 key={index}
@@ -356,13 +356,7 @@ const PageCity = () => {
           textButton={infoBannerOcio.textButton}
         />
       </div>
-      <div className="mt-6">
-        <ButtonGeneral
-          children={"Ver post"}
-          onClick={() => navigate("/post/mi-primer-post")}
-          className={"bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300"}
-        />
-      </div>
+  
     </div>
   );
 };

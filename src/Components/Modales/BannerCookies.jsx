@@ -2,43 +2,49 @@ import { useLocation, useNavigate } from "react-router";
 import ButtonGeneral from "../Buttons/ButtonGeneral";
 import { useEffect, useState } from "react";
 
-
 export default function BannerCookies() {
   const navigate = useNavigate();
   const location = useLocation();
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
-    // Verificar si estamos en la página de privacidad
     const pathParts = location.pathname.split("/");
     const slug = pathParts[pathParts.length - 1];
-    
-    if (slug === "politica-privacidad-cookies") {
-      setShowBanner(false);
-      return;
-    }
 
-    // Verificar si ya hay una decisión guardada
-    const consent = localStorage.getItem("cookie_consent");
-    if (!consent) {
-      // Si no hay decisión guardada, mostrar el banner
-      setShowBanner(true);
+    if (slug === "politica-privacidad-&-cookies") {
+      setShowBanner(false);
+    } else {
+      const consent = localStorage.getItem("cookie_consent");
+      if (!consent) {
+        setShowBanner(true);
+      }
     }
   }, [location.pathname]);
 
   const handleConsent = (decision) => {
-    // Guardar la decisión del usuario
     localStorage.setItem("cookie_consent", decision);
-    // Guardar la fecha de la decisión
-    localStorage.setItem("cookie_consent_date", new Date().toISOString());
-    
-    // Si el usuario acepta, podemos cargar servicios que requieren consentimiento
-    if (decision === "accepted") {
-      // Aquí puedes cargar Google Analytics u otros servicios que requieren consentimiento
-      console.log("Consentimiento aceptado. Cargando servicios...");
-    }
-    
     setShowBanner(false);
+    if (decision === "accepted") {
+      // const script = document.createElement("script");
+      // script.src = "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX";
+      // script.async = true;
+      // document.head.appendChild(script);
+  
+  
+      // script.onload = () => {
+      //   window.dataLayer = window.dataLayer || [];
+      //   function gtag() {
+      //     window.dataLayer.push(arguments);
+      //   }
+      //   gtag('js', new Date());
+      //   gtag('config', 'G-XXXXXXX');
+      // };
+      console.log(
+        "Consentimiento aceptado. Puedes cargar Google Analytics aquí."
+      );
+    } else {
+      console.log("Consentimiento denegado.");
+    }
   };
 
   if (!showBanner) {
@@ -46,8 +52,12 @@ export default function BannerCookies() {
   }
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-[9999] flex justify-center items-center">
-      <div className="bg-white border border-neutral-200 rounded-xl p-6 max-w-2xl w-full mx-4 flex flex-col gap-5">
+    <div
+      className={`fixed w-full h-full bg-black/50 z-999 flex justify-center items-center`}
+    >
+      <div
+        className={`bg-gray-100 border border-neutral-200 rounded-xl p-10 w-2xl flex flex-col gap-5 m-4`}
+      >
         <p className="text-2xl font-semibold text-center">
           Gestionar consentimiento
         </p>
@@ -59,10 +69,10 @@ export default function BannerCookies() {
           este sitio. No consentir o retirar el consentimiento puede afectar
           negativamente a ciertas características y funciones.
         </p>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
           <ButtonGeneral
             children={"Aceptar"}
-            className={"w-full bg-[color:var(--color-primary)] text-white"}
+            className={"w-full bg-[color:var(--color-primary)]"}
             onClick={() => handleConsent("accepted")}
           />
           <ButtonGeneral
@@ -73,7 +83,7 @@ export default function BannerCookies() {
           <ButtonGeneral
             children={"Ver Políticas"}
             className={"w-full bg-gray-200 shadow-lg text-black col-span-2 md:col-span-1"}
-            onClick={() => navigate("/politica-privacidad-cookies")}
+            onClick={() => navigate("/politica-privacidad-&-cookies")}
           />
         </div>
       </div>

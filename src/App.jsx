@@ -4,31 +4,30 @@ import { useEffect } from "react";
 import { useSetAtom } from "jotai";
 import { fetchUser } from "./Context/User";
 import { useUserRole } from "./Hooks/useUserRole";
+import "./global.css";
 
 import PageHome from "./Page/PageHome";
 import PageLogin from "./Page/PageLogin";
 import RegisterPage from "./Page/RegisterPage";
-import CompanyRegister from "./Page/CompanyRegister";
 
-import PageAdmin from "./Page/PageAdmin";
-import PageCollaborator from "./Page/PageCollaborator";
 import PageCategory from "./Page/PageCategory";
 import PageCity from "./Page/PageCity";
 
 import Layout from "./Components/Layout";
 
-import "./global.css";
-import PageCategories from "./Page/PageCategories";
-import PageCities from "./Page/PageCities";
 import PageAbout from "./Page/PageAbout";
 import PageContact from "./Page/PageContact";
 import PagePost from "./Page/PagePost";
+import PageEvento from "./Page/PageEvento";
+import PageEditarEvent from "./Page/PageEditarEvent";
+import PageDashboard from "./Page/PageDashboard";
 import PagePrivacy from "./Page/PagePrivacy";
+
 const PublicRoute = ({ element }) => {
   const { role, loading } = useUserRole();
   if (loading) return <div>Cargando...</div>;
-  if (role === "ADMIN") return <Navigate to="/admin" />;
-  if (role === "COLLABORATOR") return <Navigate to="/collaborator" />;
+  if (role === "ADMIN" || role === "COLLABORATOR")
+    return <Navigate to="/dashboard" />;
   return element;
 };
 
@@ -39,10 +38,17 @@ const AdminRouter = ({ element }) => {
   return <Navigate to="/" />;
 };
 
-const CollaboratorRouter = ({ element }) => {
+// const CollaboratorRouter = ({ element }) => {
+//   const { role, loading } = useUserRole();
+//   if (loading) return <div>Cargando...</div>;
+//   if (role === "COLLABORATOR") return element;
+//   return <Navigate to="/" />;
+// };
+
+const CollaboratorAndAdminRouter = ({ element }) => {
   const { role, loading } = useUserRole();
   if (loading) return <div>Cargando...</div>;
-  if (role === "COLLABORATOR") return element;
+  if (role === "COLLABORATOR" || role === "ADMIN") return element;
   return <Navigate to="/" />;
 };
 
@@ -56,20 +62,17 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/">
-          <Route element={<Layout />}>
+        <Route element={<Layout />}>
+          <Route path="/">
             <Route index element={<PageHome />} />
-
             <Route path="ciudades/:city" element={<PageCity />} />
-            {/* <Route path="ciudades/:city/:category" element={} /> */} Crear página
-
+            {/* <Route path="ciudades/:city/:category" element={} /> */} Crear
+            página
             <Route path="categorias/:category" element={<PageCategory />} />
-
             <Route path="sobre-nosotros" element={<PageAbout />} />
             <Route path="contacto" element={<PageContact />} />
-
-            <Route path="post/:postTitle" element={<PagePost />} />
-
+            <Route path="post/:city/:category/:name" element={<PagePost />} />
+            <Route path="eventos" element={<PageEvento />} />
             <Route
               path="politica-privacidad-cookies"
               element={<PagePrivacy />}
@@ -83,20 +86,20 @@ function App() {
               element={<PublicRoute element={<RegisterPage />} />}
             />
             <Route
-              path="company-register"
-              element={<CompanyRegister />}
+              path="dashboard/evento/:id"
+              element={
+                <CollaboratorAndAdminRouter element={<PageEditarEvent />} />
+              }
             />
             <Route
-              path="admin"
-              element={<AdminRouter element={<PageAdmin />} />}
-            />
-            <Route
-              path="collaborator"
-              element={<CollaboratorRouter element={<PageCollaborator />} />}
+              path="dashboard"
+              element={
+                <CollaboratorAndAdminRouter element={<PageDashboard />} />
+              }
             />
           </Route>
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
-        <Route path="*" element={<h1>404 - Página no encontrada</h1>} />
       </Routes>
     </>
   );

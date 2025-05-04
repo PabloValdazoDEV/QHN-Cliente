@@ -25,44 +25,13 @@ const PageLogin = () => {
       const reponse = await tryLogin(data);
       if (reponse.message === "Login successful" && reponse.token) {
         reset();
-        // Obtener el rol del usuario
-        const me = await tryMe(reponse.token);
-        if (me && me.user && me.user.role) {
-          if (me.user.role === "ADMIN") {
-            navigate("/admin");
-          } else if (me.user.role === "COLLABORATOR") {
-            navigate("/collaborator");
-          } else {
-            navigate("/");
-          }
-        } else {
-          navigate("/");
-        }
+        navigate("/dashboard");
         refetchUser();
       }
 
-      // setMessageInfo(reponse.message);
-
-      if (
-        reponse.message == "Credenciales invalidas, tienes 2 intentos." ||
-        reponse.message == "Credenciales invalidas, tienes 1 intentos."
-      ) {
+      if(reponse.message !== "Server error"){
         setMessageInfo(reponse.message);
       }
-      if (reponse.message == "Ese correo no esta registrado") {
-        setMessageInfo(reponse.message);
-      }
-      if (reponse.message == "Ese correo no esta registrado.") {
-        setMessageInfo(reponse.message);
-      }
-      if (
-        reponse.message ==
-        "Ha superado el número máximo de intentos. Intentelo más tarde."
-      ) {
-        setMessageInfo(reponse.message);
-      }
-
-      // console.log(reponse.message);
     },
   });
 
@@ -72,7 +41,7 @@ const PageLogin = () => {
 
   return (
     <>
-      <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
+      <div className="max-w-4xl mx-auto flex flex-col items-center">
         <h2 className="text-2xl font-bold text-gray-800 mb-6">
           Inicio de sesión
         </h2>

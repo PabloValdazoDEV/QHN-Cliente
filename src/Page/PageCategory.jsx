@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import CardVertical from "../Components/Cards/CardVertical";
 import BannerVertical from "../Components/Banners/BannerVertical";
@@ -10,6 +10,15 @@ import CategoryPill from "../Components/CategoryPill";
 const PageCategory = () => {
   const { category } = useParams();
 
+  const [userPreferences, setUserPreferences] = useState(null);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("recommendation_data");
+    if (stored) {
+      setUserPreferences(JSON.parse(stored));
+    }
+  }, []);
+  
   const [masNoticias, setMasNoticias] = useState(1)
 
   const infoNoticias = [
@@ -43,33 +52,53 @@ const PageCategory = () => {
     },
     textButton: "Botón",
   };
+
+
   const noticiasOcios = [];
   const masNoticiasOcios = [];
 
-  for (let i = 0; i < 9; i++) {
-    //Se tendría que cambiar esto infoNoticias[0] por infoNoticias[i]
-    noticiasOcios.push(
-      i === 0 ? (
-        //Esta es la Noticia principal
-        <CardVertical
-          key={i}
-          title={infoNoticias[0].title}
-          description={infoNoticias[0].description.slice(0, 100) + "..."}
-          link={infoNoticias[0].link}
-          image={infoNoticias[0].image}
-        />
-      ) : (
-        //Estas son las Noticias secundarias
-        <CardVerticalMini
-          key={i}
-          title={infoNoticias[0].title}
-          description={infoNoticias[0].description.slice(0, 30) + "..."}
-          link={infoNoticias[0].link}
-          image={infoNoticias[0].image}
-        />
-      )
-    );
-  }
+  const filteredNoticias = userPreferences
+  ? infoNoticias.filter((n) => {
+      const ciudadMatch = n.link
+        .toLowerCase()
+        .includes(userPreferences.city?.toLowerCase());
+
+      const edadMatch = Array.isArray(n.edades)
+        ? userPreferences.childrenAges.some((edad) =>
+            n.edades.includes(parseInt(edad))
+          )
+        : true;
+
+      return ciudadMatch && edadMatch;
+    })
+  : infoNoticias;
+
+  const safeNoticias = filteredNoticias.length > 0 ? filteredNoticias : infoNoticias;
+
+for (let i = 0; i < 9; i++) {
+  const noticia = safeNoticias[i % safeNoticias.length];
+
+  noticiasOcios.push(
+    i === 0 ? (
+      <CardVertical
+        key={i}
+        title={noticia.title}
+        description={noticia.description.slice(0, 100) + "..."}
+        link={noticia.link}
+        image={noticia.image}
+      />
+    ) : (
+      <CardVerticalMini
+        key={i}
+        title={noticia.title}
+        description={noticia.description.slice(0, 30) + "..."}
+        link={noticia.link}
+        image={noticia.image}
+      />
+    )
+  );
+}
+
   for (let i = 0; i < (8 * masNoticias); i++) {
     //Se tendría que cambiar esto infoMasNoticias[0] por infoMasNoticias[i]
     masNoticiasOcios.push(
@@ -84,7 +113,7 @@ const PageCategory = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <div >
       <div className="flex items-center justify-between mb-5">
         <h2 className="text-2xl font-bold text-gray-800">
           {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -95,8 +124,8 @@ const PageCategory = () => {
         Conoce las noticias de {category} más importantes
       </p>
       <div className="flex flex-col gap-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div className="col-span-1 md:col-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
+          <div className="col-span-1 md:col-span-3">
             {noticiasOcios[0]}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
               {noticiasOcios.slice(1, 10).map((card) => card)}
@@ -109,6 +138,7 @@ const PageCategory = () => {
                 message={infoBannerOcio.message}
                 onClickButton={infoBannerOcio.onClickButton}
                 textButton={infoBannerOcio.textButton}
+                classNam
               />
             </div>
           </div>

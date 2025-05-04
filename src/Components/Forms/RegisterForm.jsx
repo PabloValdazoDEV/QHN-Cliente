@@ -1,106 +1,85 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import InputGeneral from '../Input/InputGeneral';
+import ButtonGeneral from '../Buttons/ButtonGeneral';
+import { useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
+import { tryRegister } from '../../Api/Auth';
 
 const RegisterForm = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    email: '',
-    name: '',
-    entity: '',
-    password: '',
-    confirmPassword: '',
-    role: 'COLLABORATOR'
-  });
-  const [isCompany, setIsCompany] = useState(false);
+  //   email: '',
+  //   name: '',
+  //   entity: '',
+  //   password: '',
+  //   confirmPassword: '',
+  //   role: 'COLLABORATOR'
+  // });
   const [error, setError] = useState('');
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+  
+  const {handleSubmit, register, reset,  formState: { errors } } = useForm()
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-
-    if (formData.password !== formData.confirmPassword) {
-      setError('Las contraseñas no coinciden');
-      return;
+  const mutation = useMutation({
+    mutationFn: async (data) => {
+      console.log(data)
+      await tryRegister(data)
+      navigate("/")
     }
+  })
+  const onSubmit = (data) => {
+    mutation.mutate(data)
+  }
 
-    try {
-      const response = await axios.post('http://localhost:3000/register', formData);
-      if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
-        if (isCompany) {
-          navigate('/company-register');
-        } else {
-          navigate('/dashboard');
-        }
-      }
-    } catch (err) {
-      console.error('Error completo:', err);
-      setError(err.response?.data?.message || 'Error al registrar usuario');
-    }
-  };
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-6 text-center">Registro de Colaborador</h2>
       {error && <div className="mb-4 p-2 bg-red-100 text-red-700 rounded">{error}</div>}
       
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Email</label>
-          <input
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <InputGeneral
             type="email"
             name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
+            placeholder='Email'
+            {...register("email", {required: true})}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
           />
-        </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Nombre</label>
-          <input
+
+
+          <InputGeneral
             type="text"
             name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
+            placeholder='Nombre'
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+            {...register("name", {required: true})}
           />
-        </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Entidad</label>
-          <input
+
+          <InputGeneral
             type="text"
             name="entity"
-            value={formData.entity}
-            onChange={handleChange}
-            required
+            placeholder='Entidad'
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-          />
-        </div>
+            {...register("entity", {required: true})}
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Contraseña</label>
+          />
+
           <div className="relative">
-            <input
+            <InputGeneral
               type={showPassword ? "text" : "password"}
               name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
+              placeholder='Contraseña'
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              {...register("password", {
+                required: true,
+                pattern: {
+                  value: /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{7,}$/gm,
+                  message: "La contraseña no cumple los parametros",
+                },
+              })}
             />
             <button
               type="button"
@@ -110,40 +89,28 @@ const RegisterForm = () => {
               {showPassword ? "👁️" : "👁️‍🗨️"}
             </button>
           </div>
-        </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Confirmar Contraseña</label>
-          <input
+          <InputGeneral
             type={showPassword ? "text" : "password"}
             name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            required
+            placeholder='Confirmar Contraseña'
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+            {...register("confirmPassword", {
+              required: true,
+              pattern: {
+                value: /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{7,}$/gm,
+                message: "La contraseña no cumple los parametros",
+              },
+            })}
           />
-        </div>
 
-        <div className="flex items-center">
-          <input
-            id="isCompany"
-            name="isCompany"
-            type="checkbox"
-            checked={isCompany}
-            onChange={() => setIsCompany(!isCompany)}
-            className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-          />
-          <label htmlFor="isCompany" className="ml-2 block text-sm text-gray-700">
-            ¿Eres una empresa colaboradora? Marca aquí para completar la información de tu empresa.
-          </label>
-        </div>
 
-        <button
+        <ButtonGeneral
           type="submit"
+          children='Registrarse'
           className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        >
-          Registrarse
-        </button>
+        />
+          
       </form>
     </div>
   );

@@ -22,7 +22,7 @@
     body {
       @apply font-sans text-base text-neutral-800 bg-white leading-relaxed;
       font-family: var(--font-display);
-      @apply dark:bg-gray-900 dark:text-white;
+      /* @apply dark:bg-gray-900 dark:text-white; */
     }
   
     h1 {
