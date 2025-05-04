@@ -101,10 +101,6 @@ export default function PageCreateEvent() {
       slug: slug,
       id_user: userContext.id,
     };
-
-    console.log("payload", payload);
-    console.log("data", data);
-
     const dataResponse = await mutationEventUpload.mutateAsync(
       JSON.stringify(payload)
     );

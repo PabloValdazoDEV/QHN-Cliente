@@ -17,7 +17,7 @@ import Modal from "../Components/Modales/Modal";
 import InputToggle from "../Components/Input/InputToggle";
 import PageCreateEvent from "./PageCreateEvent";
 import SelectGeneral from "../Components/Input/SelectGeneral";
-import { getAllUser, PutUser, PutUserPassword } from "../Api/User";
+import { deleteUser, getAllUser, PutUser, PutUserPassword } from "../Api/User";
 
 const UserManagement = () => {
   const navigate = useNavigate();
@@ -27,6 +27,7 @@ const UserManagement = () => {
   const [editingUser, setEditingUser] = useState(null);
   const [changePassword, setChangePassword] = useState(false);
   const [messageInfo, setMessageInfo] = useState("");
+  const [userSelectDelete, setUserSelectDelete] = useState(null);
 
   const {
     handleSubmit,
@@ -65,6 +66,16 @@ const UserManagement = () => {
       queryClient.invalidateQueries(["users"]);
       reset();
       setEditingUser(null);
+    },
+  });
+
+  const deleteUserMutation = useMutation({
+    mutationFn: async (data) => {
+      return await deleteUser(data, userContext.id);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["users"]);
+      setUserSelectDelete(null);
     },
   });
 
@@ -301,17 +312,36 @@ const UserManagement = () => {
                       />
                     </div>
                   ) : (
-                    <ButtonGeneral
-                      children="Editar"
-                      className="bg-blue-500 hover:bg-blue-600 text-white"
-                      onClick={() => setEditingUser(user)}
-                    />
+                    <div className="flex flex-row gap-2 items-center">
+                      <ButtonGeneral
+                        children="Editar"
+                        className="bg-blue-500 hover:bg-blue-600 text-white"
+                        onClick={() => setEditingUser(user)}
+                      />
+                      <ButtonGeneral
+                        children="Borrar"
+                        className="bg-red-500 hover:bg-red-600 text-white"
+                        onClick={() => setUserSelectDelete(user)}
+                      />
+                    </div>
                   )}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        {userSelectDelete && (
+          <Modal
+            children={`¿Estás seguro de eliminar al usuario "${userSelectDelete.name}"?`}
+            btn_left_text="Cancelar"
+            btn_left_onClick={() => setUserSelectDelete(null)}
+            btn_right_text="Eliminar"
+            btn_right_onClick={() =>
+              deleteUserMutation.mutate(userSelectDelete.id)
+            }
+            btn_right_className="bg-red-500 hover:bg-red-600"
+          />
+        )}
       </div>
     </div>
   );

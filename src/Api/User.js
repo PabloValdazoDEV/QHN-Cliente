@@ -45,4 +45,17 @@ const PutUserPassword = async (id, data) => {
       }
 }
 
-export { getAllUser, PutUser, PutUserPassword };
+const deleteUser = async (idOldUser, idNewUser) => {
+    try {
+        await api.put(`/user/delete/${idOldUser}`, {idNewUser}, {
+              headers: {
+                Authorization: `Bearer ${Cookies.get("token")}`,
+              },
+            });
+            return 
+      } catch (error) {
+        return { success: false, message: error.response.data.message };
+      }
+}
+
+export { getAllUser, PutUser, PutUserPassword, deleteUser };
