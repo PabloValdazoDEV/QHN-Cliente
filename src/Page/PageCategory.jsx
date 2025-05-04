@@ -57,20 +57,23 @@ const PageCategory = () => {
   const masNoticiasOcios = [];
 
   const filteredNoticias = userPreferences
-  ? infoNoticias.filter((n) => {
-      const ciudadMatch = n.link
-        .toLowerCase()
-        .includes(userPreferences.city?.toLowerCase());
+    ? infoNoticias.filter((n) => {
+        const ciudadMatch = n.link
+          .toLowerCase()
+          .includes(userPreferences.city?.toLowerCase());
 
-      const edadMatch = Array.isArray(n.edades)
-        ? userPreferences.childrenAges.some((edad) =>
-            n.edades.includes(parseInt(edad))
-          )
-        : true;
+        const edadMatch = Array.isArray(n.edades)
+          ? userPreferences.childrenAges.some((edad) =>
+              n.edades.includes(parseInt(edad))
+            )
+          : true;
 
-      return ciudadMatch && edadMatch;
-    })
-  : infoNoticias;
+        const categoriaMatch = n.category?.toLowerCase() === category?.toLowerCase();
+
+        return ciudadMatch && edadMatch && categoriaMatch;
+      })
+    : infoNoticias.filter((n) => n.category?.toLowerCase() === category?.toLowerCase());
+
 
   const safeNoticias = filteredNoticias.length > 0 ? filteredNoticias : infoNoticias;
 

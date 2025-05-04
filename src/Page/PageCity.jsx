@@ -30,63 +30,6 @@ const PageCity = () => {
       image: "https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1",
     },
   ];
-
-  const infoMasNoticias = [
-    {
-      title: "Titulo",
-      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-      link: "/ciudades/madrid",
-      image: "https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1",
-    },
-  ];
-
-  const infoBannerOcio = {
-    image: "https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1",
-    message: "Titulo Banner",
-    onClickButton: () => {
-      console.log("Boton del Banner");
-    },
-    textButton: "Botón",
-  };
-
-  // Generación de noticias
-  const noticiasOcios = [];
-  const masNoticiasOcios = [];
-
-  for (let i = 0; i < 9; i++) {
-    noticiasOcios.push(
-      i === 0 ? (
-        <CardVertical
-          key={i}
-          title={infoNoticias[0].title}
-          description={infoNoticias[0].description.slice(0, 100) + "..."}
-          link={infoNoticias[0].link}
-          image={infoNoticias[0].image}
-        />
-      ) : (
-        <CardVerticalMini
-          key={i}
-          title={infoNoticias[0].title}
-          description={infoNoticias[0].description.slice(0, 30) + "..."}
-          link={infoNoticias[0].link}
-          image={infoNoticias[0].image}
-        />
-      )
-    );
-  }
-
-  for (let i = 0; i < 8 * masNoticias; i++) {
-    masNoticiasOcios.push(
-      <CardVerticalMini
-        key={i}
-        title={infoMasNoticias[0].title}
-        description={infoMasNoticias[0].description.slice(0, 30) + "..."}
-        link={infoMasNoticias[0].link}
-        image={infoMasNoticias[0].image}
-      />
-    );
-  }
-
   // Datos de ejemplo para ciudades
   const ciudadesEjemplo = [
     {
@@ -204,6 +147,95 @@ const PageCity = () => {
       ],
     },
   ];
+
+  const [userPreferences, setUserPreferences] = useState(null);
+
+    useEffect(() => {
+      const stored = localStorage.getItem("recommendation_data");
+      if (stored) {
+        setUserPreferences(JSON.parse(stored));
+      }
+    }, []);
+
+
+  const infoMasNoticias = [
+    {
+      title: "Titulo",
+      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      link: "/ciudades/madrid",
+      image: "https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1",
+    },
+  ];
+
+  const infoBannerOcio = {
+    image: "https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1",
+    message: "Titulo Banner",
+    onClickButton: () => {
+      console.log("Boton del Banner");
+    },
+    textButton: "Botón",
+  };
+  const filteredNoticias = userPreferences
+    ? ciudadesEjemplo
+        .filter((categoria) =>
+          userPreferences.interests.includes(categoria.nombre)
+        )
+        .flatMap((categoria) =>
+          categoria.posts.filter((post) => {
+            if (Array.isArray(post.edades)) {
+              return userPreferences.childrenAges.some((edad) =>
+                post.edades.includes(parseInt(edad))
+              );
+            }
+            return true;
+          })
+        )
+    : ciudadesEjemplo.flatMap((categoria) => categoria.posts);
+
+  const safeNoticias = filteredNoticias.length > 0
+    ? filteredNoticias
+    : ciudadesEjemplo.flatMap((categoria) => categoria.posts);
+
+
+  // Generación de noticias
+  const noticiasOcios = [];
+  const masNoticiasOcios = [];
+  
+  for (let i = 0; i < 9; i++) {
+    const noticia = safeNoticias[i % safeNoticias.length];
+    noticiasOcios.push(
+      i === 0 ? (
+        <CardVertical
+          key={i}
+          title={noticia.title}
+          description={noticia.description.slice(0, 100) + "..."}
+          link={noticia.link}
+          image={noticia.image}
+        />
+      ) : (
+        <CardVerticalMini
+          key={i}
+          title={noticia.title}
+          description={noticia.description.slice(0, 30) + "..."}
+          link={noticia.link}
+          image={noticia.image}
+        />
+      )
+    );
+  }
+  
+  for (let i = 0; i < 8 * masNoticias; i++) {
+    const noticia = safeNoticias[(i + 9) % safeNoticias.length];
+    masNoticiasOcios.push(
+      <CardVerticalMini
+        key={i}
+        title={noticia.title}
+        description={noticia.description.slice(0, 30) + "..."}
+        link={noticia.link}
+        image={noticia.image}
+      />
+    );
+  }  
 
   // Función para obtener el post de la ciudad actual
   const obtenerPostCiudad = () => {

@@ -163,17 +163,36 @@ export default function RecommendModal() {
 
               <div>
                 <label className="block font-semibold mb-1">¿Qué tipo de contenidos te interesan? <span className="text-sm text-gray-500">(Puedes elegir varios)</span></label>
-                <select
-                  name="interests"
-                  multiple
-                  value={formData.interests}
-                  onChange={handleInterestsChange}
-                  className="w-full border p-2 rounded h-32 accent-[color:var(--color-primary)]"
-                >
-                  {navbarCategories.map((cat) => (
-                    <option key={cat.name} value={cat.name} >{cat.name}</option>
-                  ))}
-                </select>
+<div>
+  <label className="block font-semibold mb-1">
+    ¿Qué tipo de contenidos te interesan? <span className="text-sm text-gray-500">(Puedes elegir varios)</span>
+  </label>
+  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+    {navbarCategories.map((cat) => {
+      const selected = formData.interests.includes(cat.name);
+      return (
+        <button
+          key={cat.name}
+          type="button"
+          onClick={() => {
+            const newInterests = selected
+              ? formData.interests.filter((i) => i !== cat.name)
+              : [...formData.interests, cat.name];
+            setFormData({ ...formData, interests: newInterests });
+          }}
+          className={`w-full py-2 px-3 rounded-lg border text-sm font-medium transition 
+            ${selected
+              ? "bg-[color:var(--color-primary)] text-white border-[color:var(--color-primary)]"
+              : "bg-white text-gray-700 border-gray-300 hover:border-[color:var(--color-primary)] hover:text-[color:var(--color-primary)]"
+            }`}
+        >
+          {cat.name}
+        </button>
+      );
+    })}
+  </div>
+</div>
+
               </div>
 
                 <label className="block font-semibold mb-1">Correo electrónico <span className="text-sm text-gray-500">(Para enviarte ideas cada semana)</span></label>

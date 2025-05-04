@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router";
-import { useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useParams, useLocation } from "react-router-dom";
 import BannerVertical from "../Components/Banners/BannerVertical";
 import BannerHorizontal from "../Components/Banners/BannerHorizontal";
 import RelatedNews from "../Components/Blocks/RelatedNews";
@@ -11,136 +9,129 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import InputGeneral from "../Components/Input/InputGeneral";
 
-
 const PagePost = () => {
-  const postData = {
-            title: "Este es el título del artículo, es un poco largo para probar el diseño",
-            author: "John Smith",
-            category: "Categoria",
-            breadcrumb: "Inicio / Categoria",
-      };
-      
+  const { slug } = useParams();
+  const [postData, setPostData] = useState(null);
   const [masNoticias, setMasNoticias] = useState(1);
+  const [userPreferences, setUserPreferences] = useState(null);
 
-  const bannerInfo = {
-    image: "https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1",
-    message: "Titulo Banner",
-    onClickButton: () => console.log("Botón del banner pulsado"),
-    textButton: "Botón",
-  };
+  const location = useLocation();
+  const fullUrl = window.location.origin + location.pathname;
 
-  const infoMasNoticias = [
-    {
-      title: "Título relacionado",
-      description: "",
-      link: "/post/ejemplo",
-      image: "https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1",
+  useEffect(() => {
+    const stored = localStorage.getItem("recommendation_data");
+    if (stored) {
+      setUserPreferences(JSON.parse(stored));
+    }
+  }, []);
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const res = await fetch(`/api/eventos/${slug}`);
+        const data = await res.json();
+        setPostData(data);
+      } catch (error) {
+        console.error("Error al cargar el evento:", error);
+      }
+    };
+
+    fetchPost();
+  }, [slug]);
+
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const mutation = useMutation({
+    mutationFn: (data) => {
+      console.log("Newsletter enviada:", data);
     },
-  ];
+  });
+
+  if (!postData) {
+    return <div className="p-8 text-center text-gray-500">Cargando evento...</div>;
+  }
+
+  const infoNoticias = []; 
+
+  const filteredNoticias = userPreferences
+    ? infoNoticias.filter((n) => {
+        const ciudadMatch = n.link
+          .toLowerCase()
+          .includes(userPreferences.city?.toLowerCase());
+
+        const edadMatch = Array.isArray(n.edades)
+          ? userPreferences.childrenAges.some((edad) =>
+              n.edades.includes(parseInt(edad))
+            )
+          : true;
+
+        const categoriaMatch = n.category?.toLowerCase() === postData.category?.toLowerCase();
+
+        return ciudadMatch && edadMatch && categoriaMatch;
+      })
+    : infoNoticias.filter(
+        (n) => n.category?.toLowerCase() === postData.category?.toLowerCase()
+      );
+
+  const safeNoticias =
+    filteredNoticias.length > 0 ? filteredNoticias : infoNoticias;
 
   const masUltimasNoticias = [];
-  for (let i = 0; i < (8 * masNoticias); i++) {
+
+  for (let i = 0; i < 8 * masNoticias; i++) {
+    const noticia = safeNoticias[i % safeNoticias.length];
     masUltimasNoticias.push(
       <CardVerticalMini
         key={i}
-        title={infoMasNoticias[0].title}
-        description={infoMasNoticias[0].description.slice(0, 30) + "..."}
-        link={infoMasNoticias[0].link}
-        image={infoMasNoticias[0].image}
+        title={noticia.title}
+        description={noticia.description.slice(0, 30) + "..."}
+        link={noticia.link}
+        image={noticia.image}
         showDescription={false}
       />
     );
   }
 
-  const mutation = useMutation({
-    mutationFn: (data) => {
-      console.log("Newsletter enviada:", data);
-    }
-  });
-  
-  const { register, handleSubmit, formState: { errors } } = useForm();
-
-  const location = useLocation();
-  
-  const fullUrl = window.location.origin + location.pathname;
-  
   return (
     <div>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
-        {/* Contenido principal del post */}
         <div className="lg:col-span-8">
-          {/* Breadcrumb */}
           <div className="text-sm text-[color:var(--color-secondary)] mb-8">
-            {postData.breadcrumb}<span className="text-[color:var(--color-primary)]"></span>
+            Inicio / {postData.category}
           </div>
 
-          {/* Título */}
           <h1 className="text-3xl font-bold text-[color:var(--color-primary)] mb-8">
             {postData.title}
           </h1>
 
-          {/* Autor del articulo */}
           <div className="flex items-center text-sm text-neutral-700 mb-4">
             <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-4 h-4 mr-2 text-[color:var(--color-secondary)]"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-4 h-4 mr-2 text-[color:var(--color-secondary)]"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
             >
-                <path d="M2 21a8 8 0 0 1 10.821-7.487m8.557 3.113a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" />
-                <circle cx="10" cy="8" r="5" />
+              <path d="M2 21a8 8 0 0 1 10.821-7.487m8.557 3.113a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" />
+              <circle cx="10" cy="8" r="5" />
             </svg>
-            <span>Escrito por {postData.author}</span>
-            </div>
+            <span>Escrito por {postData.author || "Autor desconocido"}</span>
+          </div>
 
-
-          {/* Imagen de portada (obligatoria al hacer el post) */}
           <img
-            src="https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1"
+            src={postData.image}
             alt="Imagen del post"
             className="rounded-lg mb-6 w-full object-cover"
           />
 
-          {/* Texto de prueba del articulo */}
-          <div className="text-base text-neutral-700 leading-relaxed space-y-6">
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non urna vitae odio viverra posuere. 
-                Aenean vitae ex hendrerit, tincidunt justo sed, porta nisl. Integer pretium nunc sit amet orci fermentum, 
-                in pretium turpis cursus.
-            </p>
+          <div
+            className="text-base text-neutral-700 leading-relaxed space-y-6"
+            dangerouslySetInnerHTML={{ __html: postData.content }}
+          ></div>
 
-            <h2 className="text-xl font-bold text-[color:var(--color-primary)] mt-8 mb-4">
-                La tradición detrás del evento
-            </h2>
-
-            <p>
-                Fusce at metus in est vulputate sollicitudin. Aliquam erat volutpat. Sed ac elit in augue fermentum tincidunt. 
-                Cras id orci ut magna lacinia euismod. Sed porta purus ut purus vestibulum, at laoreet arcu rhoncus.
-            </p>
-
-            <h2 className="text-xl font-bold text-[color:var(--color-primary)] mt-8 mb-4">
-                Actividades destacadas
-            </h2>
-
-            <p>
-                Suspendisse potenti. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                Vivamus sit amet turpis a velit fermentum efficitur at ut est. Vestibulum ac sagittis tortor.
-            </p>
-
-            <p>
-                Integer lobortis nulla nec justo imperdiet, vitae tincidunt felis porta. Etiam fermentum nulla non ante aliquam, 
-                nec porttitor nulla hendrerit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.
-            </p>
-        </div>
-
-
-
-          {/* Enlaces para compartir la publicacion en redes */}
           <div className="my-10">
             <h3 className="text-xl font-bold text-[color:var(--color-primary)] mb-4">
                 Compártenos
@@ -165,11 +156,15 @@ const PagePost = () => {
                 </a>
             </div>
           </div>
+
           <div className="my-10">
             <h2 className="text-3xl font-bold text-[color:var(--color-primary)] mb-4">
-                Suscríbete a nuestra Newsletter
+              Suscríbete a nuestra Newsletter
             </h2>
-            <form className="mt-4 space-y-3" onSubmit={handleSubmit((data) => mutation.mutate(data))}>
+            <form
+              className="mt-4 space-y-3"
+              onSubmit={handleSubmit((data) => mutation.mutate(data))}
+            >
               <div className="relative">
                 <InputGeneral
                   id={"emailNewsLetter"}
@@ -182,29 +177,40 @@ const PagePost = () => {
                   type="submit"
                   className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-[color:var(--color-primary)] hover:bg-blue-600 text-white rounded-lg px-4 py-1 transition"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    />
                   </svg>
                 </button>
               </div>
-
-              {/* Casilla para aceptar política de privacidad */}
               <div className="flex items-start space-x-2">
                 <input
                   type="checkbox"
                   id="privacyPolicy"
-                  {...register("privacyPolicy", { required: "Debes aceptar la Política de Privacidad." })}
+                  {...register("privacyPolicy", {
+                    required: "Debes aceptar la Política de Privacidad."
+                  })}
                   className="mt-1"
                 />
                 <label htmlFor="privacyPolicy" className="text-sm text-neutral-700">
                   Acepto la&nbsp;
-                  <Link to="/politica-privacidad" className="text-[color:var(--color-primary)] underline hover:opacity-80">
+                  <Link
+                    to="/politica-privacidad"
+                    className="text-[color:var(--color-primary)] underline hover:opacity-80"
+                  >
                     Política de Privacidad
                   </Link>
                 </label>
               </div>
-
-              {/* Mensaje de error en rojo */}
               {errors.privacyPolicy && (
                 <p className="text-sm text-red-600">
                   {errors.privacyPolicy.message}
@@ -214,50 +220,47 @@ const PagePost = () => {
           </div>
         </div>
 
-        {/* Lado derecho que sera solo visible para escritorio */}
         <div className="hidden lg:block lg:col-span-4 space-y-8">
           <BannerVertical
-            image={bannerInfo.image}
-            message={bannerInfo.message}
-            onClickButton={bannerInfo.onClickButton}
-            textButton={bannerInfo.textButton}
+            image={postData.image}
+            message={postData.title}
+            onClickButton={() => {}}
+            textButton={"Leer más"}
           />
           <RelatedNews title="Noticias Relacionadas" posts={[]} />
         </div>
       </div>
 
-
-
       <div className="mt-16">
-      <hr className="border-t-2 [color:var(--color-primary)] my-8" />
-
+        <hr className="border-t-2 [color:var(--color-primary)] my-8" />
         <div className="mt-10">
-            <BannerHorizontal
-              image={bannerInfo.image}
-              message={bannerInfo.message}
-              onClickButton={bannerInfo.onClickButton}
-              textButton={bannerInfo.textButton}
-            />
-          </div>
-        <div className="mt-10">
-                <h2 className="text-2xl font-bold text-gray-800 text-center col-span-full mb-5">
-                Ultimas noticias
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-                {masUltimasNoticias}
-                <div className="col-span-full text-center">
-                    <ButtonGeneral
-                    children={"Ver más noticias"}
-                    onClick={() => {
-                        masNoticias < 3 ? setMasNoticias(masNoticias + 1) : alert("No hay más noticias");
-                    }}
-                    className={"bg-[color:var(--color-primary)] text-white"}
-                    />
-                </div>
-                </div>
-            </div>
+          <BannerHorizontal
+            image={postData.image}
+            message={postData.title}
+            onClickButton={() => {}}
+            textButton={"Leer más"}
+          />
         </div>
-
+        <div className="mt-10">
+          <h2 className="text-2xl font-bold text-gray-800 text-center col-span-full mb-5">
+            Últimas noticias
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {masUltimasNoticias}
+            <div className="col-span-full text-center">
+              <ButtonGeneral
+                children={"Ver más noticias"}
+                onClick={() => {
+                  masNoticias < 3
+                    ? setMasNoticias(masNoticias + 1)
+                    : alert("No hay más noticias");
+                }}
+                className={"bg-[color:var(--color-primary)] text-white"}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
