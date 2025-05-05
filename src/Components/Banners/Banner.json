@@ -1,0 +1,31 @@
+{
+    "ciudad": [
+      {
+        "image": "https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1",
+        "message": "Titulo Banner ciudad",
+        "link": "https://entradas.quehacerconlosninos.es/",
+        "textButton": "Botón"
+      },
+      {
+        "image": "https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1",
+        "message": "Titulo Banner ciudad",
+        "link": "https://entradas.quehacerconlosninos.es/",
+        "textButton": "Botón"
+      }
+    ],
+    "categoria": [
+      {
+        "image": "https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1",
+        "message": "Titulo Banner categoria",
+        "link": "https://entradas.quehacerconlosninos.es/",
+        "textButton": "Botón"
+      },
+      {
+        "image": "https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1",
+        "message": "Titulo Banner categoria",
+        "link": "https://entradas.quehacerconlosninos.es/",
+        "textButton": "Botón"
+      }
+    ]
+  }
+  

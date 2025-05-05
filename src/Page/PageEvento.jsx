@@ -12,7 +12,7 @@ export default function PageEvento() {
 
   useEffect(() => {
     // fetch(`http://localhost:3000/api/eventos/${id}`)
-    fetch(`http://localhost:3000/api/eventos`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/eventos`)
       .then((res) => res.json())
       .then(setEventos);
   }, [id]);

@@ -51,7 +51,7 @@ export default function TinyEditor({ onChange, initialValue }) {
 
         automatic_uploads: true,
         file_picker_types: "image",
-        images_upload_url: "http://localhost:3000/api/eventos/upload",
+        images_upload_url: `${import.meta.env.VITE_API_URL}/api/eventos/upload`,
         image_title: true,
         image_caption: true,
 
@@ -79,7 +79,7 @@ export default function TinyEditor({ onChange, initialValue }) {
               var formData = new FormData();
               formData.append("file", file);
 
-              fetch("http://localhost:3000/api/eventos/upload", {
+              fetch(`${import.meta.env.VITE_API_URL}/api/eventos/upload`, {
                 method: "POST",
                 body: formData,
                 headers: {
