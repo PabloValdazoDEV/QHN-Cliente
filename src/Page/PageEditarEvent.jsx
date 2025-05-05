@@ -40,9 +40,9 @@ export default function PageEditarEvent() {
     "Madrid",
     "Malaga",
     "Valencia",
-    "Bacelona",
+    "Barcelona",
     "Sevilla",
-    "Zaragonza",
+    "Zaragoza",
     "Otro",
   ];
   const discapacidades = ["Visual", "Auditiva", "Motora", "Ninguna"];
