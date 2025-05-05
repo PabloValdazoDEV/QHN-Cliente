@@ -9,7 +9,7 @@ const uploadImage = async (file) => {
   const formData = new FormData();
   formData.append('file', file);
 
-  const resp = await fetch('http://localhost:3000/api/eventos/upload', {
+  const resp = await fetch(`${import.meta.env.VITE_API_URL}/api/eventos/upload`, {
     method: 'POST',
     body: formData,
     headers: {

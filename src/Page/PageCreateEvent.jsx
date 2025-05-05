@@ -105,7 +105,7 @@ export default function PageCreateEvent() {
       JSON.stringify(payload)
     );
     if (dataResponse.message === "Evento guardado") {
-      return navigate("/dashboard");
+      return navigate(0);
     } else {
       alert("Error al guardar el evento");
       return;
