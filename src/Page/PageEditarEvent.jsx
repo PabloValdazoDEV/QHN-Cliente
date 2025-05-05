@@ -40,13 +40,13 @@ export default function PageEditarEvent() {
     "Madrid",
     "Malaga",
     "Valencia",
-    "Bacelona",
+    "Barcelona",
     "Sevilla",
-    "Zaragonza",
+    "Zaragoza",
     "Otro",
   ];
   const discapacidades = ["Visual", "Auditiva", "Motora", "Ninguna"];
-  const modalidades = ["Presencial", "Online", "Mixto"];
+  const modalidades = ["Cubierto", "Al aire libre"];
 
   const mutationEventUploadImage = useMutation({
     mutationFn: eventUploadImage,

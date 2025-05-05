@@ -48,11 +48,11 @@ export default function PageCreateEvent() {
     "Valencia",
     "Bacelona",
     "Sevilla",
-    "Zaragonza",
+    "Zaragoza",
     "Otro",
   ];
   const discapacidades = ["Visual", "Auditiva", "Motora", "Ninguna"];
-  const modalidades = ["Presencial", "Online", "Mixto"];
+  const modalidades = ["Cubierto", "Al aire libre"];
 
   const uploadImage = async (file) => {
     const formData = new FormData();

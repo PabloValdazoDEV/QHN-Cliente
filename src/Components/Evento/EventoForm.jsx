@@ -49,7 +49,7 @@ export default function EventoForm() {
       content,
     };
 
-    await fetch('http://localhost:3000/api/eventos', {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/eventos`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -134,6 +134,7 @@ const getAllEventosUser = async () =>{
     };
   }
 }
+
 const getAllEventosUserLast = async () =>{
   try {
     const response = await api.get(`/api/eventos/user/last`);
@@ -170,6 +171,21 @@ const getEventosSlug = async (city, category, name) =>{
   }
 }
 
+const getEventCategory = async (category) =>{
+  try {
+
+    const response = await api.get(`/api/eventos/categoria/${category}`)
+
+    return response.data
+    
+  } catch (error) {
+    return {
+      success: false,
+      message: error.response?.data?.message || "Error de red",
+    };
+  }
+}
+
 export {
   eventUploadImage,
   eventUpload,
@@ -182,5 +198,6 @@ export {
   getAllEventosUser,
   getEventosUser,
   getAllEventosUserLast,
-  getEventosSlug
+  getEventosSlug,
+  getEventCategory
 };
