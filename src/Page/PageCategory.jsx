@@ -5,6 +5,7 @@ import BannerVertical from "../Components/Banners/BannerVertical";
 import CardVerticalMini from "../Components/Cards/CardVerticalMini";
 import BannerHorizontal from "../Components/Banners/BannerHorizontal";
 import ButtonGeneral from "../Components/Buttons/ButtonGeneral";
+import CategoryPill from "../Components/CategoryPill";
 
 const PageCategory = () => {
   const { category } = useParams();
@@ -115,16 +116,19 @@ for (let i = 0; i < 9; i++) {
   }
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold text-gray-800 text-center mb-5">
-        {category.charAt(0).toUpperCase() + category.slice(1)}
-      </h2>
+    <div >
+      <div className="flex items-center justify-between mb-5">
+        <h2 className="text-2xl font-bold text-gray-800">
+          {category.charAt(0).toUpperCase() + category.slice(1)}
+        </h2>
+        <CategoryPill category={category.charAt(0).toUpperCase() + category.slice(1)} />
+      </div>
       <p className="text-gray-600 text-center mb-5">
         Conoce las noticias de {category} más importantes
       </p>
       <div className="flex flex-col gap-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div className="col-span-1 md:col-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
+          <div className="col-span-1 md:col-span-3">
             {noticiasOcios[0]}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
               {noticiasOcios.slice(1, 10).map((card) => card)}
@@ -137,6 +141,7 @@ for (let i = 0; i < 9; i++) {
                 message={infoBannerOcio.message}
                 onClickButton={infoBannerOcio.onClickButton}
                 textButton={infoBannerOcio.textButton}
+                classNam
               />
             </div>
           </div>

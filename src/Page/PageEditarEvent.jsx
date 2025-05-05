@@ -129,7 +129,7 @@ export default function PageEditarEvent() {
       data: payload,
     });
     if (response && response.message === "Evento actualizado") {
-      navigate("/dashboard/eventos");
+      navigate("/dashboard");
     } else {
       alert("Error al actualizar el evento");
     }

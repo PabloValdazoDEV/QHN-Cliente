@@ -66,6 +66,14 @@ export default function Footer() {
                 </svg>
               </a>
             </div>
+            <div className="mt-4">
+              <Link 
+                to="/registro" 
+                className="text-[color:var(--color-primary)] hover:text-blue-600 transition no-underline font-medium"
+              >
+                ¿Quieres colaborar con nosotros?
+              </Link>
+            </div>
           </div>
 
           <div>
@@ -196,7 +204,7 @@ export default function Footer() {
                 />
                 <label htmlFor="privacyPolicy" className="text-sm text-neutral-700">
                   Acepto la&nbsp;
-                  <Link to="/cookies" className="text-[color:var(--color-primary)] underline hover:opacity-80">
+                  <Link to="/politica-privacidad-cookies" className="text-[color:var(--color-primary)] underline hover:opacity-80">
                     Política de Privacidad
                   </Link>
                 </label>
@@ -222,9 +230,9 @@ export default function Footer() {
             Todos los derechos reservados.
           </p>
           <div className="flex space-x-6">
-          <Link to="/politica-privacidad-&-cookies" className=" text-neutral-700 hover:text-[color:var(--color-primary)] text-sm no-underline hover:underline">
+            <Link to="/politica-privacidad-cookies" className="text-neutral-700 hover:text-[color:var(--color-primary)] text-sm hover:underline">
               Política de Privacidad y Cookies
-              </Link>
+            </Link>
           </div>
         </div>
       </div>
