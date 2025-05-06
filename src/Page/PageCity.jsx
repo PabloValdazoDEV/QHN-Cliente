@@ -171,7 +171,7 @@ const PageCity = () => {
             {Object.entries(categoriasAgrupadas).map(([categoria, posts], index) => (
               <div
                 key={index}
-                className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full transform hover:-translate-y-1 hover:scale-[1.02] flex flex-col"
+                className="group rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full transform hover:-translate-y-1 hover:scale-[1.02] flex flex-col"
               >
                 <div className="h-48 overflow-hidden">
                   <img
@@ -182,14 +182,11 @@ const PageCity = () => {
                 </div>
 
                 <div className="p-4 flex flex-col flex-grow">
-                  <div className="flex items-center justify-between mb-2">
-                    <h4 className="text-xl font-semibold">{categoria}</h4>
-                    <CategoryPill category={categoria} />
-                  </div>
+                  <h4 className="text-xl font-semibold mb-2 text-[color:var(--color-primary)] group-hover:text-[color:var(--color-secondary)] transition-colors duration-300">{categoria}</h4>
                   <p className="text-gray-600 mb-4">Explora noticias relacionadas.</p>
 
                   <div className="border-t pt-4 flex flex-col flex-grow">
-                    <h5 className="font-medium mb-2">Noticias recientes:</h5>
+                  <h5 className="font-medium mb-2 text-[color:var(--color-primary)]">Noticias recientes:</h5>
                     <div className="space-y-3 flex-grow">
                       {posts.slice(0, 3).map((post, postIndex) => (
                         <div
@@ -197,10 +194,14 @@ const PageCity = () => {
                           className="border-b pb-2 last:border-b-0 transition-colors duration-300 hover:bg-gray-50 rounded"
                         >
                           <div className="p-2 rounded">
-                          <Link to={`/post/${post.slug}`}>
-                            <h6 className="font-medium text-[color:var(--color-primary)] no-underline">{post.nombre_evento}</h6>
-                          </Link>
-                            <p className="text-sm text-gray-500">
+                            <Link
+                              to={`/post/${post.slug}`}
+                              className="no-underline">
+                              <h6 className="font-medium text-[color:var(--color-primary)] hover:text-[color:var(--color-secondary)] transition-colors duration-300">
+                                {post.nombre_evento}
+                              </h6>
+                            </Link>
+                            <p className="text-sm text-gray-500 transition-colors duration-300 hover:text-gray-700">
                               {post.content.replace(/<[^>]*>?/gm, "").slice(0, 60)}...
                             </p>
                           </div>
@@ -208,17 +209,23 @@ const PageCity = () => {
                       ))}
                     </div>
                     <div className="mt-4">
-                    <ButtonGeneral
-                      children={"Ver más noticias"}
-                      onClick={() =>
-                        navigate(`/ciudades/${city}/${categoria.toLowerCase().replace(/\s+/g, "-")}`)
-                      }
-                    />
+                      <ButtonGeneral
+                        children={"Ver más noticias"}
+                        onClick={() =>
+                          navigate(
+                            `/ciudades/${city}/${categoria.toLowerCase().replace(/\s+/g, "-")}`
+                          )
+                        }
+                        className={
+                          "bg-[color:var(--color-primary)] text-white hover:bg-[color:var(--color-primary)] transition-colors duration-300 w-full py-2 px-4 rounded-md"
+                        }
+                      />
                     </div>
                   </div>
                 </div>
               </div>
             ))}
+
           </div>
         </div>
       </div>

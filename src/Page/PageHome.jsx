@@ -345,13 +345,9 @@ const PageHome = () => {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
             {ciudadesAgrupadas.map((ciudad, index) => (
-              <Link
+              <div
                 key={index}
-                to={`/ciudades/${ciudad.nombre
-                  .toLowerCase()
-                  .replace(/\s+/g, "-")}`}
-                className="block no-underline"
-              >
+                className="group rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full transform hover:-translate-y-1 hover:scale-[1.02] flex flex-col">
                 <div className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full transform hover:-translate-y-1 hover:scale-[1.02] flex flex-col">
                   <div className="h-48 overflow-hidden">
                     <img
@@ -362,7 +358,7 @@ const PageHome = () => {
                   </div>
 
                   <div className="p-4 flex flex-col flex-grow">
-                    <h4 className="text-xl font-semibold mb-2">
+                    <h4 className="text-xl font-semibold mb-2 text-[color:var(--color-primary)] group-hover:text-[color:var(--color-secondary)] transition-colors duration-300">
                       {ciudad.nombre}
                     </h4>
                     <p className="text-gray-600 mb-4 transition-colors duration-300 hover:text-gray-800">
@@ -370,17 +366,22 @@ const PageHome = () => {
                     </p>
 
                     <div className="border-t pt-4 flex flex-col flex-grow">
-                      <h5 className="font-medium mb-2">Noticias recientes:</h5>
+                      <h5 className="font-medium mb-2 text-[color:var(--color-primary)]">Noticias recientes:</h5>
                       <div className="space-y-3 flex-grow">
                         {ciudad.posts.map((post, postIndex) => (
                           <div
                             key={postIndex}
-                            className="border-b pb-2 last:border-b-0 transition-colors duration-300 hover:bg-gray-50 rounded"
+                            className="border-b pb-2 last:border-b-0"
                           >
                             <div className="p-2 rounded">
-                              <h6 className="font-medium text-[color:var(--color-primary)]">
-                                {post.title}
-                              </h6>
+                              <Link
+                                to={post.link}
+                                className="no-underline hover:text-[color:var(--color-secondary)] transition-colors duration-300"
+                              >
+                                <h6 className="font-medium text-[color:var(--color-primary)] hover:text-[color:var(--color-secondary)] transition-colors duration-300">
+                                  {post.title}
+                                </h6>
+                              </Link>
                               <p className="text-sm text-gray-500 transition-colors duration-300 hover:text-gray-700">
                                 {post.description}
                               </p>
@@ -402,7 +403,7 @@ const PageHome = () => {
                     </div>
                   </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>
