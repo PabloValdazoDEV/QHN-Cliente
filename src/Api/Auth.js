@@ -47,5 +47,15 @@ const tryMe = async (token) => {
   }
 };
 
+const suscribirNewsletter = async (email, name) => {
+  try {
+    const response = await api.post("/newsletter", { email, name });
+    return response.data;
+  } catch (error) {
+    console.error("Error al suscribirse a la newsletter:", error.response?.data || error.message);
+    return { success: false };
+  }
+};
 
-export { tryLogin, tryRegister, tryLogout, tryMe };
+
+export { tryLogin, tryRegister, tryLogout, tryMe, suscribirNewsletter };

@@ -94,7 +94,7 @@ const PageLogin = () => {
               <ButtonGeneral
                 children={"Ingresar"}
                 type="submit"
-                className=" bg-blue-600 text-white hover:bg-blue-700"
+                className=" bg-[color:var(--color-primary)] text-white hover:bg-[color:var(--color-primary)]"
               />
             </form>
           </div>

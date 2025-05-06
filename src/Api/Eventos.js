@@ -171,6 +171,17 @@ const getEventosSlug = async (city, category, name) =>{
   }
 }
 
+export const getEventosPorCiudad = async (city) => {
+  const response = await api.get(`/api/eventos/ciudad/${city}`);
+  return response.data;
+};
+
+export const getEventosPorCiudadYCategoria = async (city, category) => {
+  const response = await api.get(`/api/eventos/ciudad/${city}/${category}`);
+  return response.data;
+};
+
+
 const getEventCategory = async (category) =>{
   try {
 

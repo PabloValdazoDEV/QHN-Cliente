@@ -12,6 +12,7 @@ import RegisterPage from "./Page/RegisterPage";
 
 import PageCategory from "./Page/PageCategory";
 import PageCity from "./Page/PageCity";
+import PageCityCategory from "./Page/PageCityCategory";
 
 import Layout from "./Components/Layout";
 
@@ -66,8 +67,7 @@ function App() {
           <Route path="/">
             <Route index element={<PageHome />} />
             <Route path="ciudades/:city" element={<PageCity />} />
-            {/* <Route path="ciudades/:city/:category" element={} /> */} Crear
-            página
+            <Route path="ciudades/:city/:category" element={<PageCityCategory />} />
             <Route path="categorias/:category" element={<PageCategory />} />
             <Route path="sobre-nosotros" element={<PageAbout />} />
             <Route path="contacto" element={<PageContact />} />

@@ -9,8 +9,10 @@
 
 /* 🎨 VARIABLES GLOBALES */
 :root {
-    --color-primary: #204092;        /* Azul original del logo del sitio web */
-    --color-secondary: #e26a25;      /* Naranja original del logo del sitio web */
+    --color-primary: #0277AE;        
+    --color-secondary: #FF6B6B;      
+    --color-tertiary: #BDDCF2;        
+    --color-quaternary: #FFC0D2; 
     --font-primary: "Poppins", sans-serif;
     --font-secondary: "Open Sans", sans-serif;
     --radius-base: 0.5rem; 

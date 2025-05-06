@@ -106,7 +106,7 @@ const ContactForm = () => {
             Comentario (requerido)
           </label>
           <textarea
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)] focus:border-transparent transition-colors duration-200"
             rows="6"
             placeholder="Escribe aquí tu mensaje"
             {...register("comentario", { 
@@ -123,7 +123,7 @@ const ContactForm = () => {
         </div>
         <ButtonGeneral
           type="submit"
-          className="w-full bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200"
+          className="w-full bg-[color:var(--color-primary)] text-white hover:bg-[color:var(--color-primary)] transition-colors duration-200"
         >
           Enviar mensaje
         </ButtonGeneral>

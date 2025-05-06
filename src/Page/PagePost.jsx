@@ -8,10 +8,12 @@ import RelatedNews from "../Components/Blocks/RelatedNews";
 import CardVerticalMini from "../Components/Cards/CardVerticalMini";
 import ButtonGeneral from "../Components/Buttons/ButtonGeneral";
 import CategoryPill from "../Components/CategoryPill";
+import EventInfoPills from "../Components/EventInfoPills";
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import InputGeneral from "../Components/Input/InputGeneral";
 import { getAllEventosUserLast, getEventosSlug } from "../Api/Eventos";
+import { suscribirNewsletter } from "../Api/Auth";
 
 const PagePost = () => {
   const { city, category, name } = useParams();
@@ -68,11 +70,16 @@ const PagePost = () => {
     : [];
 
   const mutation = useMutation({
-    mutationFn: (data) => {
-      console.log("Newsletter enviada:", data);
+    mutationFn: ({ emailNewsLetter }) =>
+      suscribirNewsletter(emailNewsLetter, ""),
+    onSuccess: () => {
+      alert("¡Ya estás suscrito!");
+    },
+    onError: () => {
+      alert("Error al suscribirse. Inténtalo de nuevo.");
     },
   });
-
+    
   const {
     register,
     handleSubmit,
@@ -89,19 +96,34 @@ const PagePost = () => {
         {/* Contenido principal del post */}
         <div className="lg:col-span-8">
           {/* Breadcrumb */}
-          <div className="text-sm text-[color:var(--color-secondary)] mb-8">
-            {city.slice(0, 1).toLocaleUpperCase() + city.slice(1)} /{" "}
-            {category.slice(0, 1).toLocaleUpperCase() + category.slice(1)} /{" "}
-            {postPrimary?.post.nombre_evento}
-            <span className="text-[color:var(--color-primary)]"></span>
+          <div className="text-sm text-[color:var(--color-secondary)] mb-8 space-x-1">
+            <Link
+              to={`/ciudades/${city}`}
+              className="text-[color:var(--color-secondary)] no-underline hover:font-semibold transition"
+            >
+              {city.charAt(0).toUpperCase() + city.slice(1)}
+            </Link>
+            <span>/</span>
+            <Link
+              to={`/ciudades/${city}/${category}`}
+              className="text-[color:var(--color-secondary)] no-underline hover:font-semibold transition"
+            >
+              {category.charAt(0).toUpperCase() + category.slice(1)}
+            </Link>
+            <span>/</span>
+            <span className="font-semibold text-[color:var(--color-secondary)]">
+              {postPrimary?.post.nombre_evento}
+            </span>
           </div>
+
+
 
           {/* Título */}
           <h1 className="text-3xl font-bold text-[color:var(--color-primary)] mb-8">
             {postPrimary?.post.nombre_evento}
           </h1>
 
-          {/* Autor del articulo y categoría */}
+          {/* Autor del articulo, categoría y detalles del evento */}
           <div className="flex items-center justify-between text-sm text-neutral-700 mb-4">
             <div className="flex items-center">
               <svg
@@ -119,7 +141,15 @@ const PagePost = () => {
               </svg>
               <span>Escrito por {postPrimary?.post.user.name}</span>
             </div>
-            <CategoryPill category={postPrimary?.post.categoria} />
+            <div className="flex items-center gap-2 flex-row-reverse">
+              <CategoryPill category={postPrimary?.post.categoria} />
+              <EventInfoPills 
+                ciudad={city.charAt(0).toUpperCase() + city.slice(1)}
+                precio={postPrimary?.post.precio}
+                modalidad={postPrimary?.post.modalidad}
+                discapacidad={postPrimary?.post.discapacidad}
+              />
+            </div>
           </div>
 
           {/* Imagen de portada (obligatoria al hacer el post) */}
@@ -204,7 +234,7 @@ const PagePost = () => {
                 />
                 <button
                   type="submit"
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-[color:var(--color-primary)] hover:bg-blue-600 text-white rounded-lg px-4 py-1 transition"
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-[color:var(--color-primary)] hover:bg-[color:var(--color-primary)] text-white rounded-lg px-4 py-1 transition"
                 >
                   <svg
                     className="w-5 h-5"
@@ -259,10 +289,10 @@ const PagePost = () => {
         {/* Lado derecho que sera solo visible para escritorio */}
         <div className="hidden lg:block lg:col-span-4 space-y-8">
           <BannerVertical
-            image={bannerInfo.image}
-            message={bannerInfo.message}
-            onClickButton={bannerInfo.onClickButton}
-            textButton={bannerInfo.textButton}
+            // image={bannerInfo.image}
+            // message={bannerInfo.message}
+            // onClickButton={bannerInfo.onClickButton}
+            // textButton={bannerInfo.textButton}
           />
          {postPrimary?.moreOptions.length !== 0 && <RelatedNews title="Noticias Relacionadas" moreOptions={postPrimary?.moreOptions} /> }
         </div>
@@ -273,10 +303,10 @@ const PagePost = () => {
 
         <div className="mt-10">
           <BannerHorizontal
-            image={bannerInfo.image}
-            message={bannerInfo.message}
-            onClickButton={bannerInfo.onClickButton}
-            textButton={bannerInfo.textButton}
+            // image={bannerInfo.image}
+            // message={bannerInfo.message}
+            // onClickButton={bannerInfo.onClickButton}
+            // textButton={bannerInfo.textButton}
           />
         </div>
         <div className="mt-10">

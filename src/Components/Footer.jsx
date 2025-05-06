@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import InputGeneral from "./Input/InputGeneral";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { suscribirNewsletter } from "../Api/Auth";
+
 
 export default function Footer() {
   useEffect(() => {
@@ -12,10 +14,16 @@ export default function Footer() {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const mutation = useMutation({
-    mutationFn: (data) => {
-      console.log(data)
-    }
-  })
+    mutationFn: ({ emailNewsLetter }) =>
+      suscribirNewsletter(emailNewsLetter, ""), 
+    onSuccess: () => {
+      alert("¡Gracias por suscribirte!");
+    },
+    onError: () => {
+      alert("Error al suscribirse. Inténtalo de nuevo.");
+    },
+  });
+
 
 
   return (
@@ -69,7 +77,7 @@ export default function Footer() {
             <div className="mt-4">
               <Link 
                 to="/registro" 
-                className="text-[color:var(--color-primary)] hover:text-blue-600 transition no-underline font-medium"
+                className="text-[color:var(--color-primary)] hover:text-[color:var(--color-primary)] transition no-underline font-medium"
               >
                 ¿Quieres colaborar con nosotros?
               </Link>
@@ -165,7 +173,7 @@ export default function Footer() {
               <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 mr-2 [stroke:var(--color-primary)]" viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2a19.8 19.8 0 0 1-8.63-3.07a19.5 19.5 0 0 1-6-6a19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72a12.8 12.8 0 0 0 .7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45a12.8 12.8 0 0 0 2.81.7A2 2 0 0 1 22 16.92"/>
               </svg>
-              666 66 66 66
+              696 66 66 66
             </a>
           </div>
 
@@ -187,7 +195,7 @@ export default function Footer() {
                 />
                 <button
                   type="submit"
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-[color:var(--color-primary)] hover:bg-blue-600 text-white rounded-lg px-4 py-1 transition"
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-[color:var(--color-primary)] hover:bg-[color:var(--color-primary)] text-white rounded-lg px-4 py-1 transition"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -237,7 +245,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="orb absolute w-64 h-64 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 filter blur-3xl pointer-events-none"></div>
+      <div className="orb absolute w-64 h-64 rounded-full bg-gradient-to-r from-[color:var(--color-primary)]/10 to-purple-500/10 filter blur-3xl pointer-events-none"></div>
     </footer>
   );
 }

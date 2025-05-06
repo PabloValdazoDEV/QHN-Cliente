@@ -22,7 +22,7 @@ const PageContact = () => {
               <div className="space-y-6">
                 <div className="flex items-start">
                   <div className="flex-shrink-0">
-                    <svg className="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="h-6 w-6 text-[color:var(--color-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
@@ -35,7 +35,7 @@ const PageContact = () => {
 
                 <div className="flex items-start">
                   <div className="flex-shrink-0">
-                    <svg className="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="h-6 w-6 text-[color:var(--color-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
                   </div>
@@ -47,7 +47,7 @@ const PageContact = () => {
 
                 <div className="flex items-start">
                   <div className="flex-shrink-0">
-                    <svg className="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="h-6 w-6 text-[color:var(--color-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
@@ -92,7 +92,7 @@ const PageContact = () => {
                   <input
                     type="email"
                     id="newsletterEmail"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)] focus:border-transparent transition-colors duration-200"
                     placeholder="Escribe aquí tu email"
                   />
                 </div>
@@ -100,7 +100,7 @@ const PageContact = () => {
                   <input
                     type="checkbox"
                     id="privacyPolicy"
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    className="h-4 w-4 text-[color:var(--color-primary)] focus:ring-[color:var(--color-primary)] border-gray-300 rounded"
                   />
                   <label htmlFor="privacyPolicy" className="ml-2 block text-sm text-gray-700">
                     Acepto las políticas de privacidad
@@ -108,7 +108,7 @@ const PageContact = () => {
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                  className="w-full bg-[color:var(--color-primary)] text-white py-3 px-4 rounded-lg hover:bg-[color:var(--color-primary)] transition-colors duration-200"
                 >
                   Suscribirse
                 </button>

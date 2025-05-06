@@ -11,7 +11,7 @@ export default function BannerCookies() {
     const pathParts = location.pathname.split("/");
     const slug = pathParts[pathParts.length - 1];
 
-    if (slug === "politica-privacidad-&-cookies") {
+    if (slug === "politica-privacidad-cookies") {
       setShowBanner(false);
     } else {
       const consent = localStorage.getItem("cookie_consent");
@@ -77,13 +77,13 @@ export default function BannerCookies() {
           />
           <ButtonGeneral
             children={"Denegar"}
-            className={"w-full bg-gray-200 shadow-lg text-black"}
+            className={"w-full bg-gray-500 shadow-lg text-black hover:bg-gray-600 "}
             onClick={() => handleConsent("denied")}
           />
           <ButtonGeneral
             children={"Ver Políticas"}
-            className={"w-full bg-gray-200 shadow-lg text-black col-span-2 md:col-span-1"}
-            onClick={() => navigate("/politica-privacidad-&-cookies")}
+            className={"w-full bg-gray-500 shadow-lg text-black col-span-2 md:col-span-1 hover:bg-gray-600 "}
+            onClick={() => navigate("/politica-privacidad-cookies")}
           />
         </div>
       </div>

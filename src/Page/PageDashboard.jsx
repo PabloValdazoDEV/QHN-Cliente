@@ -178,7 +178,7 @@ const UserManagement = () => {
                 {changePassword ? (
                   <ButtonGeneral
                     children="Cancelar cambiar contraseña"
-                    className="bg-blue-500 hover:bg-blue-600 text-white"
+                    className="bg-[color:var(--color-primary)] hover:bg-[color:var(--color-primary)] text-white"
                     onClick={() => {
                       setChangePassword(false);
                     }}
@@ -186,7 +186,7 @@ const UserManagement = () => {
                 ) : (
                   <ButtonGeneral
                     children="Cambiar contraseña"
-                    className="bg-blue-500 hover:bg-blue-600 text-white"
+                    className="bg-[color:var(--color-primary)] hover:bg-[color:var(--color-primary)] text-white"
                     onClick={() => {
                       setChangePassword(true);
                     }}
@@ -245,7 +245,7 @@ const UserManagement = () => {
                   <ButtonGeneral
                     type="submit"
                     children="Restablecer contraseña"
-                    className="bg-blue-500 hover:bg-blue-600 text-white"
+                    className="bg-[color:var(--color-primary)] hover:bg-[color:var(--color-primary)] text-white"
                   />
                 </div>
               </div>
@@ -315,7 +315,7 @@ const UserManagement = () => {
                     <div className="flex flex-row gap-2 items-center">
                       <ButtonGeneral
                         children="Editar"
-                        className="bg-blue-500 hover:bg-blue-600 text-white"
+                        className="bg-[color:var(--color-primary)] hover:bg-[color:var(--color-primary)] text-white"
                         onClick={() => setEditingUser(user)}
                       />
                       <ButtonGeneral
@@ -521,7 +521,7 @@ const EventManagement = () => {
                   <div className="flex flex-row items-center justify-between gap-3 ">
                     <ButtonGeneral
                       children="Editar"
-                      className="bg-blue-500 hover:bg-blue-600 text-white"
+                      className="bg-[color:var(--color-primary)] hover:bg-[color:var(--color-primary)] text-white"
                       onClick={() => navigate(`/dashboard/evento/${event.id}`)}
                     />
                     <ButtonGeneral
