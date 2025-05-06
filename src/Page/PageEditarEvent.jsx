@@ -256,7 +256,7 @@ export default function PageEditarEvent() {
           <div className="flex flex-col gap-2 w-full">
             <InputGeneral
               {...register("precio", { required: true })}
-              type="number"
+              type="text"
               placeholder="Precio (€)"
             />
             {errors.precio && (

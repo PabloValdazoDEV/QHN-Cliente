@@ -8,13 +8,13 @@ import ButtonGeneral from "../Components/Buttons/ButtonGeneral";
 import CategoryPill from "../Components/CategoryPill";
 import { useQuery } from "@tanstack/react-query";
 import { getEventCategory } from "../Api/Eventos";
-import banner from  "../Components/Banners/Banner.json";
+
 
 const PageCategory = () => {
   const { category } = useParams();
   const [masNoticias, setMasNoticias] = useState(1);
   
-  console.log(banner)
+
 
 
   const formatCategoryForDisplay = (cat) => {
@@ -127,19 +127,19 @@ const PageCategory = () => {
             <div className="col-span-1 relative hidden md:block">
               <div className="sticky top-1/6">
                 <BannerVertical
-                  image={infoBannerOcio.image}
-                  message={infoBannerOcio.message}
-                  onClickButton={infoBannerOcio.onClickButton}
-                  textButton={infoBannerOcio.textButton}
+                  // image={infoBannerOcio.image}
+                  // message={infoBannerOcio.message}
+                  // onClickButton={infoBannerOcio.onClickButton}
+                  // textButton={infoBannerOcio.textButton}
                 />
               </div>
             </div>
           </div>
           <BannerHorizontal
-            image={infoBannerOcio.image}
-            message={infoBannerOcio.message}
-            onClickButton={infoBannerOcio.onClickButton}
-            textButton={infoBannerOcio.textButton}
+            // image={infoBannerOcio.image}
+            // message={infoBannerOcio.message}
+            // onClickButton={infoBannerOcio.onClickButton}
+            // textButton={infoBannerOcio.textButton}
           />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             <h3 className="text-2xl font-bold text-gray-800 text-center col-span-full">
@@ -161,10 +161,10 @@ const PageCategory = () => {
             </div>
           </div>
           <BannerHorizontal
-            image={infoBannerOcio.image}
-            message={infoBannerOcio.message}
-            onClickButton={infoBannerOcio.onClickButton}
-            textButton={infoBannerOcio.textButton}
+            // image={infoBannerOcio.image}
+            // message={infoBannerOcio.message}
+            // onClickButton={infoBannerOcio.onClickButton}
+            // textButton={infoBannerOcio.textButton}
           />
         </div>
       )}

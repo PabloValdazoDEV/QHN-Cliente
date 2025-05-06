@@ -10,7 +10,7 @@ const PagePrivacy = () => {
 
             <h2 className="text-2xl font-semibold mt-6 mb-2">1. Introducción</h2>
             <p>
-                Nuestra web, <a href="https://quehacerconlosninos.es" className="text-blue-500 hover:text-blue-700">https://quehacerconlosninos.es</a> utiliza cookies y otras tecnologías relacionadas (para mayor comodidad, todas las tecnologías se denominan «cookies»). Las cookies también son colocadas por terceros a los que hemos contratado. En el siguiente documento te informamos sobre el uso de cookies en nuestra web.
+                Nuestra web, <a href="https://quehacerconlosninos.es" className="text-[color:var(--color-primary)] hover:text-[color:var(--color-primary)]">https://quehacerconlosninos.es</a> utiliza cookies y otras tecnologías relacionadas (para mayor comodidad, todas las tecnologías se denominan «cookies»). Las cookies también son colocadas por terceros a los que hemos contratado. En el siguiente documento te informamos sobre el uso de cookies en nuestra web.
             </p>
 
             <h2 className="text-2xl font-semibold mt-6 mb-2">2. ¿Qué son las cookies?</h2>
@@ -49,6 +49,7 @@ const PagePrivacy = () => {
             <p>
                 En nuestra web hemos incluido contenido de Facebook y Instagram para promover páginas web (p.ej.: «Me gusta», «Pinear») o compartir (p.ej.: «tuitear») en redes sociales como Facebook y Instagram. Este contenido está incrustado con código derivado de Facebook y Instagram y guarda cookies. Este contenido podría procesar cierta información para anuncios personalizados.
                 Por favor lea la política de privacidad de estas redes sociales (que puede cambiar frecuentemente) para saber que hacen con sus datos (personales) que procesan usando estas cookies. Los datos que reciben son anonimizados lo máximo posible. Facebook y Instagram están ubicados en los Estados Unidos.
+                </p >
                 <h2 className="text-2xl font-semibold mt-6 mb-2">6. Cookies usadas</h2>
                 <div className="flex gap-8">
                     <ul>
@@ -101,7 +102,7 @@ const PagePrivacy = () => {
 
 
                 </div>
-                <h2 className="text-2xl font-semibold mt-6 mb-2">9. 10. Datos de contacto</h2>
+                <h2 className="text-2xl font-semibold mt-6 mb-2">10. Datos de contacto</h2>
                 <p>
                 Para preguntas y/o comentarios sobre nuestra política de cookies y esta declaración, por favor, contacta con nosotros usando los siguientes datos de contacto:
 
@@ -112,14 +113,14 @@ const PagePrivacy = () => {
 
                         <li>C/Carlos Dabán, 26, 28019 - MADRID</li>
                         <li>España</li>
-                        <li>Web: <a href="https://quehacerconlosninos.es" className="text-blue-500 hover:text-blue-700">https://quehacerconlosninos.es</a></li>
+                        <li>Web: <a href="https://quehacerconlosninos.es" className="text-[color:var(--color-primary)] hover:text-[color:var(--color-primary)]">https://quehacerconlosninos.es</a></li>
 
                         <li>Correo electrónico: info@qhn.es</li>
                         <li>Número de teléfono: 624 02 91 89</li>
                     </ul>
 
                 </div>
-            </p >
+            
 
         </div >
     );

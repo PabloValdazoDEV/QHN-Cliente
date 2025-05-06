@@ -98,10 +98,10 @@ const PageCityCategory = () => {
           <div className="col-span-1 relative hidden md:block">
             <div className="sticky top-1/6 ">
               <BannerVertical
-                image={infoBannerOcio.image}
-                message={infoBannerOcio.message}
-                onClickButton={infoBannerOcio.onClickButton}
-                textButton={infoBannerOcio.textButton}
+                // image={infoBannerOcio.image}
+                // message={infoBannerOcio.message}
+                // onClickButton={infoBannerOcio.onClickButton}
+                // textButton={infoBannerOcio.textButton}
               />
             </div>
           </div>
@@ -124,10 +124,10 @@ const PageCityCategory = () => {
           </div>
         )}
         <BannerHorizontal
-          image={infoBannerOcio.image}
-          message={infoBannerOcio.message}
-          onClickButton={infoBannerOcio.onClickButton}
-          textButton={infoBannerOcio.textButton}
+          // image={infoBannerOcio.image}
+          // message={infoBannerOcio.message}
+          // onClickButton={infoBannerOcio.onClickButton}
+          // textButton={infoBannerOcio.textButton}
         />
       </div>
     </div>

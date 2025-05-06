@@ -71,7 +71,7 @@ export default function EventoForm() {
       <input {...register('integrantes')} type="number" placeholder="Integrantes" className="input" />
       <input {...register('edades')} placeholder="Edades" className="input" />
       <input {...register('modalidades')} placeholder="Modalidades" className="input" />
-      <input {...register('precio')} type="number" placeholder="Precio (€)" className="input" />
+      <input {...register('precio')} type="text" placeholder="Precio (€)" className="input" />
       <input {...register('image')} placeholder="URL de imagen destacada" className="input" />
 
       <label>Contenido:</label>

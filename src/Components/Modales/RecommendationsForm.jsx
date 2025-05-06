@@ -150,7 +150,7 @@ export default function RecommendModal() {
                   </div>
                 ))}
                 {formData.childrenAges.length < 5 && (
-                  <ButtonGeneral onClick={handleAddChild} className="mt-2 text-sm text-blue-600">
+                  <ButtonGeneral onClick={handleAddChild} className="mt-2 text-sm text-[color:var(--color-primary)]">
                     Añadir otro hijo
                   </ButtonGeneral>
                 )}
@@ -227,7 +227,7 @@ export default function RecommendModal() {
                         className="accent-[color:var(--color-primary)]"
                         />
                         <label htmlFor="privacy" className="text-sm text-neutral-700">
-                        Acepto la <a href="/politica-privacidad-cookies" target="_blank" className="text-blue-600 underline">política de privacidad</a>
+                        Acepto la <a href="/politica-privacidad-cookies" target="_blank" className="text-[color:var(--color-primary)] underline">política de privacidad</a>
                         </label>
                     </div>
                     )}

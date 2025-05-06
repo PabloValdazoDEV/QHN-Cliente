@@ -225,7 +225,7 @@ const PagePost = () => {
                 />
                 <button
                   type="submit"
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-[color:var(--color-primary)] hover:bg-blue-600 text-white rounded-lg px-4 py-1 transition"
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-[color:var(--color-primary)] hover:bg-[color:var(--color-primary)] text-white rounded-lg px-4 py-1 transition"
                 >
                   <svg
                     className="w-5 h-5"
@@ -280,10 +280,10 @@ const PagePost = () => {
         {/* Lado derecho que sera solo visible para escritorio */}
         <div className="hidden lg:block lg:col-span-4 space-y-8">
           <BannerVertical
-            image={bannerInfo.image}
-            message={bannerInfo.message}
-            onClickButton={bannerInfo.onClickButton}
-            textButton={bannerInfo.textButton}
+            // image={bannerInfo.image}
+            // message={bannerInfo.message}
+            // onClickButton={bannerInfo.onClickButton}
+            // textButton={bannerInfo.textButton}
           />
          {postPrimary?.moreOptions.length !== 0 && <RelatedNews title="Noticias Relacionadas" moreOptions={postPrimary?.moreOptions} /> }
         </div>
@@ -294,10 +294,10 @@ const PagePost = () => {
 
         <div className="mt-10">
           <BannerHorizontal
-            image={bannerInfo.image}
-            message={bannerInfo.message}
-            onClickButton={bannerInfo.onClickButton}
-            textButton={bannerInfo.textButton}
+            // image={bannerInfo.image}
+            // message={bannerInfo.message}
+            // onClickButton={bannerInfo.onClickButton}
+            // textButton={bannerInfo.textButton}
           />
         </div>
         <div className="mt-10">

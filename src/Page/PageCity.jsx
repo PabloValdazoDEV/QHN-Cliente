@@ -35,7 +35,7 @@ const PageCity = () => {
     queryFn: () => getEventosPorCiudad(city),
   });
   
-  console.log("Eventos recibidos:", eventos);
+  // console.log("Eventos recibidos:", eventos);
 
 
   const [userPreferences, setUserPreferences] = useState(null);
@@ -123,10 +123,10 @@ const PageCity = () => {
         {/* Banner Principal */}
         <div className="w-full">
           <BannerHorizontal
-            image={infoBannerOcio.image}
-            message={infoBannerOcio.message}
-            onClickButton={infoBannerOcio.onClickButton}
-            textButton={infoBannerOcio.textButton}
+            // image={infoBannerOcio.image}
+            // message={infoBannerOcio.message}
+            // onClickButton={infoBannerOcio.onClickButton}
+            // textButton={infoBannerOcio.textButton}
           />
         </div>
 
@@ -143,10 +143,10 @@ const PageCity = () => {
           <div className="col-span-1 relative hidden md:block">
             <div className="sticky top-1/6 w-full">
               <BannerVertical
-                image={infoBannerOcio.image}
-                message={infoBannerOcio.message}
-                onClickButton={infoBannerOcio.onClickButton}
-                textButton={infoBannerOcio.textButton}
+                // image={infoBannerOcio.image}
+                // message={infoBannerOcio.message}
+                // onClickButton={infoBannerOcio.onClickButton}
+                // textButton={infoBannerOcio.textButton}
               />
             </div>
           </div>
@@ -155,10 +155,10 @@ const PageCity = () => {
         {/* Banner Secundario */}
         <div className="w-full">
           <BannerHorizontal
-            image={infoBannerOcio.image}
-            message={infoBannerOcio.message}
-            onClickButton={infoBannerOcio.onClickButton}
-            textButton={infoBannerOcio.textButton}
+            // image={infoBannerOcio.image}
+            // message={infoBannerOcio.message}
+            // onClickButton={infoBannerOcio.onClickButton}
+            // textButton={infoBannerOcio.textButton}
           />
         </div>
 
@@ -198,7 +198,7 @@ const PageCity = () => {
                         >
                           <div className="p-2 rounded">
                           <Link to={`/post/${post.slug}`}>
-                            <h6 className="font-medium text-blue-600 no-underline">{post.nombre_evento}</h6>
+                            <h6 className="font-medium text-[color:var(--color-primary)] no-underline">{post.nombre_evento}</h6>
                           </Link>
                             <p className="text-sm text-gray-500">
                               {post.content.replace(/<[^>]*>?/gm, "").slice(0, 60)}...
@@ -224,7 +224,7 @@ const PageCity = () => {
       </div>
 
       <div className="w-full mt-10">
-        <BannerHorizontal {...infoBannerOcio} />
+        <BannerHorizontal  />
       </div>
     </div>
   );

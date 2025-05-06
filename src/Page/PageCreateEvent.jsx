@@ -224,7 +224,7 @@ export default function PageCreateEvent() {
           <div className="flex flex-col gap-2 w-full">
             <InputGeneral
               {...register("precio", { required: true })}
-              type="number"
+              type="text"
               placeholder="Precio (€)"
             />
             {errors.precio && (
@@ -254,13 +254,11 @@ export default function PageCreateEvent() {
         <TinyEditor onChange={setHtmlContent} initialValue="" />
 
         {htmlContent ? (
-          <button type="submit" className="btn btn-primary mt-4">
-            Crear Evento
-          </button>
+          <ButtonGeneral type="submit" className="btn btn-primary mt-4" children="Crear Evento"/>
+            
         ) : (
-          <button disabled className="btn btn-primary mt-4">
-            Crear Evento
-          </button>
+                      <ButtonGeneral disabled className="btn btn-primary mt-4" children="Crear Evento"/>
+
         )}
         
       </form>

@@ -1,31 +1,10 @@
-{
-    "ciudad": [
-      {
-        "image": "https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1",
-        "message": "Titulo Banner ciudad",
-        "link": "https://entradas.quehacerconlosninos.es/",
-        "textButton": "Botón"
-      },
-      {
-        "image": "https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1",
-        "message": "Titulo Banner ciudad",
-        "link": "https://entradas.quehacerconlosninos.es/",
-        "textButton": "Botón"
-      }
-    ],
-    "categoria": [
-      {
-        "image": "https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1",
-        "message": "Titulo Banner categoria",
-        "link": "https://entradas.quehacerconlosninos.es/",
-        "textButton": "Botón"
-      },
-      {
-        "image": "https://es.digitaltrends.com/wp-content/uploads/2023/12/google-chrome.jpeg?p=1",
-        "message": "Titulo Banner categoria",
-        "link": "https://entradas.quehacerconlosninos.es/",
-        "textButton": "Botón"
-      }
-    ]
+[
+  {
+    "image": "/images/Horizontal.png",
+    "link": "https://heroncity.com/madrid/heron-city-las-rozas/eventos?utm_source=QueHacerConPeques&utm_medium=BrandedContent&utm_campaign=HCM-eventos25"
+  },
+  {
+    "image": "/images/Vertical.jpg",
+    "link": "https://heroncity.com/madrid/heron-city-las-rozas/eventos?utm_source=QueHacerConPeques&utm_medium=BrandedContent&utm_campaign=HCM-eventos25"
   }
-  
+]

@@ -77,7 +77,7 @@ export default function Footer() {
             <div className="mt-4">
               <Link 
                 to="/registro" 
-                className="text-[color:var(--color-primary)] hover:text-blue-600 transition no-underline font-medium"
+                className="text-[color:var(--color-primary)] hover:text-[color:var(--color-primary)] transition no-underline font-medium"
               >
                 ¿Quieres colaborar con nosotros?
               </Link>
@@ -195,7 +195,7 @@ export default function Footer() {
                 />
                 <button
                   type="submit"
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-[color:var(--color-primary)] hover:bg-blue-600 text-white rounded-lg px-4 py-1 transition"
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-[color:var(--color-primary)] hover:bg-[color:var(--color-primary)] text-white rounded-lg px-4 py-1 transition"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -245,7 +245,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="orb absolute w-64 h-64 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 filter blur-3xl pointer-events-none"></div>
+      <div className="orb absolute w-64 h-64 rounded-full bg-gradient-to-r from-[color:var(--color-primary)]/10 to-purple-500/10 filter blur-3xl pointer-events-none"></div>
     </footer>
   );
 }

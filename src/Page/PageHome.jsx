@@ -235,8 +235,8 @@ const PageHome = () => {
     : eventPrimary || []; */
 
   // Generación de noticias
-  const noticias = Array.isArray(eventosFiltrados)
-  ? eventosFiltrados.map((event, index) =>
+  const noticias = Array.isArray(eventPrimary)
+  ? eventPrimary.map((event, index) =>
       index === 0 ? (
         <CardVertical
           key={index}
@@ -296,7 +296,7 @@ const PageHome = () => {
 
       <div className="flex flex-col gap-10">
         <div className="w-full">
-          <BannerHorizontal {...infoBannerOcio} />
+          <BannerHorizontal />
         </div>
         {/* Banner Principal */}
         {/* {ultimoPost && (
@@ -326,7 +326,7 @@ const PageHome = () => {
               </div>
               <div className="col-span-1 relative hidden md:block">
                 <div className="sticky top-1/6 w-full">
-                  <BannerVertical {...infoBannerOcio} />
+                  <BannerVertical  />
                 </div>
               </div>
             </div>
@@ -335,7 +335,7 @@ const PageHome = () => {
 
         {/* Banner Secundario */}
         <div className="w-full">
-          <BannerHorizontal {...infoBannerOcio} />
+          <BannerHorizontal  />
         </div>
 
         {/* Sección de Ciudades */}
@@ -378,7 +378,7 @@ const PageHome = () => {
                             className="border-b pb-2 last:border-b-0 transition-colors duration-300 hover:bg-gray-50 rounded"
                           >
                             <div className="p-2 rounded">
-                              <h6 className="font-medium text-blue-600">
+                              <h6 className="font-medium text-[color:var(--color-primary)]">
                                 {post.title}
                               </h6>
                               <p className="text-sm text-gray-500 transition-colors duration-300 hover:text-gray-700">
@@ -395,7 +395,7 @@ const PageHome = () => {
                             navigate(`/ciudades/${ciudad.nombre.toLowerCase()}`)
                           }
                           className={
-                            "bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300 w-full py-2 px-4 rounded-md"
+                            "bg-[color:var(--color-primary)] text-white hover:bg-[color:var(--color-primary)] transition-colors duration-300 w-full py-2 px-4 rounded-md"
                           }
                         />
                       </div>
@@ -410,7 +410,7 @@ const PageHome = () => {
 
       {/* Banner Secundario Final */}
       <div className="w-full mt-10">
-        <BannerHorizontal {...infoBannerOcio} />
+        <BannerHorizontal />
       </div>
     </div>
   );
