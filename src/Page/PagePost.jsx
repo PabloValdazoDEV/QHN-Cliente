@@ -8,6 +8,7 @@ import RelatedNews from "../Components/Blocks/RelatedNews";
 import CardVerticalMini from "../Components/Cards/CardVerticalMini";
 import ButtonGeneral from "../Components/Buttons/ButtonGeneral";
 import CategoryPill from "../Components/CategoryPill";
+import EventInfoPills from "../Components/EventInfoPills";
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import InputGeneral from "../Components/Input/InputGeneral";
@@ -101,7 +102,7 @@ const PagePost = () => {
             {postPrimary?.post.nombre_evento}
           </h1>
 
-          {/* Autor del articulo y categoría */}
+          {/* Autor del articulo, categoría y detalles del evento */}
           <div className="flex items-center justify-between text-sm text-neutral-700 mb-4">
             <div className="flex items-center">
               <svg
@@ -119,7 +120,15 @@ const PagePost = () => {
               </svg>
               <span>Escrito por {postPrimary?.post.user.name}</span>
             </div>
-            <CategoryPill category={postPrimary?.post.categoria} />
+            <div className="flex items-center gap-2 flex-row-reverse">
+              <CategoryPill category={postPrimary?.post.categoria} />
+              <EventInfoPills 
+                ciudad={city.charAt(0).toUpperCase() + city.slice(1)}
+                precio={postPrimary?.post.precio}
+                modalidad={postPrimary?.post.modalidad}
+                discapacidad={postPrimary?.post.discapacidad}
+              />
+            </div>
           </div>
 
           {/* Imagen de portada (obligatoria al hacer el post) */}

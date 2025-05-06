@@ -102,7 +102,6 @@ const PageCategory = () => {
           <h2 className="text-2xl font-bold text-gray-800">
             {formatCategoryForDisplay(category)}
           </h2>
-          <CategoryPill category={formatCategoryForDisplay(category)} />
         </div>
       </div>
       <p className="text-gray-600 text-center mb-5">
