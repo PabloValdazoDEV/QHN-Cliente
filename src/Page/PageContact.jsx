@@ -17,7 +17,7 @@ const PageContact = () => {
           {/* Primera fila: Información de contacto y formulario */}
           <div className="grid grid-cols-1 lg:grid-cols-10 gap-8">
             {/* Información de contacto (30%) */}
-            <div className="lg:col-span-3 bg-white rounded-2xl shadow-xl p-8">
+            <div className="lg:col-span-4 bg-white rounded-2xl shadow-xl p-8">
               <h3 className="text-xl font-semibold text-gray-900 mb-6">Información de Contacto</h3>
               <div className="space-y-6">
                 <div className="flex items-start">
@@ -64,7 +64,7 @@ const PageContact = () => {
             </div>
 
             {/* Formulario de contacto (70%) */}
-            <div className="lg:col-span-7 bg-white rounded-2xl shadow-xl p-8">
+            <div className="lg:col-span-6 bg-white rounded-2xl shadow-xl p-8">
               <ContactForm />
             </div>
           </div>
@@ -72,12 +72,12 @@ const PageContact = () => {
           {/* Segunda fila: Mapa y Newsletter */}
           <div className="grid grid-cols-1 lg:grid-cols-10 gap-8">
             {/* Mapa (70%) */}
-            <div className="lg:col-span-7 bg-white rounded-2xl shadow-xl p-8">
+            <div className="lg:col-span-6 bg-white rounded-2xl shadow-xl p-8">
               <MapLocation />
             </div>
 
             {/* Newsletter (30%) */}
-            <div className="lg:col-span-3 bg-white rounded-2xl shadow-xl p-8">
+            <div className="lg:col-span-4 bg-white rounded-2xl shadow-xl p-8">
               <div className="text-center">
                 <h3 className="text-2xl font-semibold text-gray-900 mb-4">Suscríbete a nuestra newsletter</h3>
                 <p className="text-gray-600 mb-6">

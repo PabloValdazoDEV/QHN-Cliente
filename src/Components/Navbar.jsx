@@ -57,7 +57,7 @@ const Navbar = () => {
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="flex items-center">
               <img
-                src="/images/logo.webp"
+                src="/images/logo-princi.png"
                 alt="QHN Logo"
                 className="h-12 w-auto"
                 onError={(e) => {

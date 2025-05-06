@@ -48,11 +48,11 @@ export default function PageCreateEvent() {
     "Valencia",
     "Bacelona",
     "Sevilla",
-    "Zaragonza",
+    "Zaragoza",
     "Otro",
   ];
   const discapacidades = ["Visual", "Auditiva", "Motora", "Ninguna"];
-  const modalidades = ["Presencial", "Online", "Mixto"];
+  const modalidades = ["Cubierto", "Al aire libre"];
 
   const uploadImage = async (file) => {
     const formData = new FormData();
@@ -101,15 +101,11 @@ export default function PageCreateEvent() {
       slug: slug,
       id_user: userContext.id,
     };
-
-    console.log("payload", payload);
-    console.log("data", data);
-
     const dataResponse = await mutationEventUpload.mutateAsync(
       JSON.stringify(payload)
     );
     if (dataResponse.message === "Evento guardado") {
-      return navigate("/dashboard");
+      return navigate(0);
     } else {
       alert("Error al guardar el evento");
       return;
