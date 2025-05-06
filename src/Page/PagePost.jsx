@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import InputGeneral from "../Components/Input/InputGeneral";
 import { getAllEventosUserLast, getEventosSlug } from "../Api/Eventos";
+import { suscribirNewsletter } from "../Api/Auth";
 
 const PagePost = () => {
   const { city, category, name } = useParams();
@@ -68,11 +69,16 @@ const PagePost = () => {
     : [];
 
   const mutation = useMutation({
-    mutationFn: (data) => {
-      console.log("Newsletter enviada:", data);
+    mutationFn: ({ emailNewsLetter }) =>
+      suscribirNewsletter(emailNewsLetter, ""),
+    onSuccess: () => {
+      alert("¡Ya estás suscrito!");
+    },
+    onError: () => {
+      alert("Error al suscribirse. Inténtalo de nuevo.");
     },
   });
-
+    
   const {
     register,
     handleSubmit,
@@ -89,12 +95,27 @@ const PagePost = () => {
         {/* Contenido principal del post */}
         <div className="lg:col-span-8">
           {/* Breadcrumb */}
-          <div className="text-sm text-[color:var(--color-secondary)] mb-8">
-            {city.slice(0, 1).toLocaleUpperCase() + city.slice(1)} /{" "}
-            {category.slice(0, 1).toLocaleUpperCase() + category.slice(1)} /{" "}
-            {postPrimary?.post.nombre_evento}
-            <span className="text-[color:var(--color-primary)]"></span>
+          <div className="text-sm text-[color:var(--color-secondary)] mb-8 space-x-1">
+            <Link
+              to={`/ciudades/${city}`}
+              className="text-[color:var(--color-secondary)] no-underline hover:font-semibold transition"
+            >
+              {city.charAt(0).toUpperCase() + city.slice(1)}
+            </Link>
+            <span>/</span>
+            <Link
+              to={`/ciudades/${city}/${category}`}
+              className="text-[color:var(--color-secondary)] no-underline hover:font-semibold transition"
+            >
+              {category.charAt(0).toUpperCase() + category.slice(1)}
+            </Link>
+            <span>/</span>
+            <span className="font-semibold text-[color:var(--color-secondary)]">
+              {postPrimary?.post.nombre_evento}
+            </span>
           </div>
+
+
 
           {/* Título */}
           <h1 className="text-3xl font-bold text-[color:var(--color-primary)] mb-8">

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { categories as navbarCategories } from "../Navbar";
 import InputGeneral from "../Input/InputGeneral";
 import ButtonGeneral from "../Buttons/ButtonGeneral";
+import { suscribirNewsletter } from "../../Api/Auth";
+
 
 const DELAY_MS = 10000;
 import { cities as navbarCities } from "../Navbar";
@@ -50,7 +52,7 @@ export default function RecommendModal() {
     setFormData({ ...formData, interests: selectedOptions });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
   
     if (formData.email && !privacyAccepted) {
@@ -58,10 +60,21 @@ export default function RecommendModal() {
       return;
     }
   
-    localStorage.setItem("recommendation_data", JSON.stringify(formData));
-    localStorage.setItem("recommendation_submitted", "true");
-    setIsOpen(false);
+    try {
+      if (formData.email) {
+        await suscribirNewsletter(formData.email, "");
+      }
+  
+      localStorage.setItem("recommendation_data", JSON.stringify(formData));
+      localStorage.setItem("recommendation_submitted", "true");
+      window.dispatchEvent(new Event("storage"));      
+      setIsOpen(false);
+    } catch (error) {
+      console.error("Error al guardar recomendación:", error);
+      alert("Hubo un problema al guardar tus preferencias.");
+    }
   };
+  
 
 //  useEffect(() => {
 //    const timer = setTimeout(() => {
@@ -164,34 +177,31 @@ export default function RecommendModal() {
               <div>
                 <label className="block font-semibold mb-1">¿Qué tipo de contenidos te interesan? <span className="text-sm text-gray-500">(Puedes elegir varios)</span></label>
 <div>
-  <label className="block font-semibold mb-1">
-    ¿Qué tipo de contenidos te interesan? <span className="text-sm text-gray-500">(Puedes elegir varios)</span>
-  </label>
-  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-    {navbarCategories.map((cat) => {
-      const selected = formData.interests.includes(cat.name);
-      return (
-        <button
-          key={cat.name}
-          type="button"
-          onClick={() => {
-            const newInterests = selected
-              ? formData.interests.filter((i) => i !== cat.name)
-              : [...formData.interests, cat.name];
-            setFormData({ ...formData, interests: newInterests });
-          }}
-          className={`w-full py-2 px-3 rounded-lg border text-sm font-medium transition 
-            ${selected
-              ? "bg-[color:var(--color-primary)] text-white border-[color:var(--color-primary)]"
-              : "bg-white text-gray-700 border-gray-300 hover:border-[color:var(--color-primary)] hover:text-[color:var(--color-primary)]"
-            }`}
-        >
-          {cat.name}
-        </button>
-      );
-    })}
-  </div>
-</div>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    {navbarCategories.map((cat) => {
+                      const selected = formData.interests.includes(cat.name);
+                      return (
+                        <button
+                          key={cat.name}
+                          type="button"
+                          onClick={() => {
+                            const newInterests = selected
+                              ? formData.interests.filter((i) => i !== cat.name)
+                              : [...formData.interests, cat.name];
+                            setFormData({ ...formData, interests: newInterests });
+                          }}
+                          className={`w-full py-2 px-3 rounded-lg border text-sm font-medium transition 
+                            ${selected
+                              ? "bg-[color:var(--color-primary)] text-white border-[color:var(--color-primary)]"
+                              : "bg-white text-gray-700 border-gray-300 hover:border-[color:var(--color-primary)] hover:text-[color:var(--color-primary)]"
+                            }`}
+                        >
+                          {cat.name}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
 
               </div>
 
@@ -217,7 +227,7 @@ export default function RecommendModal() {
                         className="accent-[color:var(--color-primary)]"
                         />
                         <label htmlFor="privacy" className="text-sm text-neutral-700">
-                        Acepto la <a href="/politica-de-privacidad" target="_blank" className="text-blue-600 underline">política de privacidad</a>
+                        Acepto la <a href="/politica-privacidad-cookies" target="_blank" className="text-blue-600 underline">política de privacidad</a>
                         </label>
                     </div>
                     )}

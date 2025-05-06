@@ -47,7 +47,7 @@ const tryMe = async (token) => {
   }
 };
 
-export const suscribirNewsletter = async (email, name) => {
+const suscribirNewsletter = async (email, name) => {
   try {
     const response = await api.post("/newsletter", { email, name });
     return response.data;
@@ -58,4 +58,4 @@ export const suscribirNewsletter = async (email, name) => {
 };
 
 
-export { tryLogin, tryRegister, tryLogout, tryMe };
+export { tryLogin, tryRegister, tryLogout, tryMe, suscribirNewsletter };

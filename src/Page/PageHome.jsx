@@ -5,8 +5,11 @@ import CardVerticalMini from "../Components/Cards/CardVerticalMini";
 import BannerVertical from "../Components/Banners/BannerVertical";
 import BannerHorizontal from "../Components/Banners/BannerHorizontal";
 import ButtonGeneral from "../Components/Buttons/ButtonGeneral";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueries } from "@tanstack/react-query";
 import { getAllEventosUser } from "../Api/Eventos";
+import { getEventosPorCiudad } from "../Api/Eventos";
+
+
 
 const PageHome = () => {
   const navigate = useNavigate();
@@ -20,11 +23,65 @@ const PageHome = () => {
     queryFn: getAllEventosUser,
   });
 
+  const ciudades = ["Madrid", "Barcelona", "Malaga", "Valencia", "Sevilla", "Zaragoza"];
 
+  const resultadosCiudades = useQueries({
+    queries: ciudades.map((ciudad) => ({
+      queryKey: ["eventosPorCiudad", ciudad],
+      queryFn: () => getEventosPorCiudad(ciudad),
+    })),
+  });
+
+  const obtenerImagenDeCiudad = (ciudad) => {
+    const imagenes = {
+      Madrid: "/images/madrid.jpg",
+      Barcelona: "/images/barcelona.jpg",
+      Sevilla: "/images/sevilla.jpg",
+      Zaragoza: "/images/zaragoza.jpg",
+      Malaga: "/images/malaga.jpg",
+      Valencia: "/images/valencia.jpg",
+    };
+    return imagenes[ciudad] || "/images/default.jpg";
+  };
+
+  const ciudadesAgrupadas = resultadosCiudades.map((resultado, index) => {
+    const ciudad = ciudades[index];
+    const eventos = resultado.data || [];
+
+    return {
+      nombre: ciudad,
+      descripcion: `Explora eventos recientes en ${ciudad}.`,
+      imagen: obtenerImagenDeCiudad(ciudad),
+      posts: eventos.slice(0, 2).map((evento) => ({
+        title: evento.nombre_evento,
+        description: evento.content.replace(/<[^>]*>?/gm, '').slice(0, 60) + "...",
+        link: `/post/${evento.slug}`,
+        image: evento.image,
+      })),
+    };
+  });
+
+  // Comprobación para ver si hay datos almacenados en localstoraGE
+ /* const [recommendationData, setRecommendationData] = useState(() => {
+    const saved = localStorage.getItem("recommendation_data");
+    return saved ? JSON.parse(saved) : null;
+  });   
+  */
+
+  // actualizacion automatica dfel feed si se hacen cambios en las preferencias
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const updated = localStorage.getItem("recommendation_data");
+      setRecommendationData(updated ? JSON.parse(updated) : null);
+    };
+  
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+  
+  
   // Estados
   const [masNoticias, setMasNoticias] = useState(1);
-  // const [ultimoPost, setUltimoPost] = useState(null);
-  const [ciudades, setCiudades] = useState([]);
 
   // Datos de ejemplo para noticias y banners
   const infoNoticias = {
@@ -45,7 +102,7 @@ const PageHome = () => {
   };
 
   // Datos de ejemplo para ciudades
-  const ciudadesEjemplo = [
+ /* const ciudadesEjemplo = [
     {
       nombre: "Madrid",
       imagen: "/images/madrid.jpg",
@@ -166,11 +223,20 @@ const PageHome = () => {
         },
       ],
     },
-  ];
+  ];  */
+  
+  // Filtrado de eventos según la ciudad y categoría si se detecta que hay datos de recomendación, si no nada
+ /* const eventosFiltrados = recommendationData && Array.isArray(eventPrimary)
+    ? eventPrimary.filter((evento) => {
+        const coincideCategoria = recommendationData.interests?.includes(evento.categoria);
+        const coincideCiudad = evento.ubicacion?.toLowerCase() === recommendationData.city?.toLowerCase();
+        return coincideCategoria || coincideCiudad;
+      })
+    : eventPrimary || []; */
 
   // Generación de noticias
-  const noticias = Array.isArray(eventPrimary)
-  ? eventPrimary.map((event, index) =>
+  const noticias = Array.isArray(eventosFiltrados)
+  ? eventosFiltrados.map((event, index) =>
       index === 0 ? (
         <CardVertical
           key={index}
@@ -278,7 +344,7 @@ const PageHome = () => {
             Nuestras Ciudades
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-            {ciudadesEjemplo.map((ciudad, index) => (
+            {ciudadesAgrupadas.map((ciudad, index) => (
               <Link
                 key={index}
                 to={`/ciudades/${ciudad.nombre
