@@ -197,7 +197,9 @@ const PageCity = () => {
                           className="border-b pb-2 last:border-b-0 transition-colors duration-300 hover:bg-gray-50 rounded"
                         >
                           <div className="p-2 rounded">
-                            <h6 className="font-medium text-blue-600">{post.nombre_evento}</h6>
+                          <Link to={`/post/${post.slug}`}>
+                            <h6 className="font-medium text-blue-600 no-underline">{post.nombre_evento}</h6>
+                          </Link>
                             <p className="text-sm text-gray-500">
                               {post.content.replace(/<[^>]*>?/gm, "").slice(0, 60)}...
                             </p>

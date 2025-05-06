@@ -106,12 +106,6 @@ const PageCityCategory = () => {
             </div>
           </div>
         </div>
-        <BannerHorizontal
-          image={infoBannerOcio.image}
-          message={infoBannerOcio.message}
-          onClickButton={infoBannerOcio.onClickButton}
-          textButton={infoBannerOcio.textButton}
-        />
         {masNoticiasOcios.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 ">
             <h3 className="text-2xl font-bold text-gray-800 text-center col-span-full">
