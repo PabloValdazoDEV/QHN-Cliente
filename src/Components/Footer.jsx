@@ -93,22 +93,6 @@ export default function Footer() {
             >
               Home
             </Link>
-
-            <br />
-            <Link
-              to="/ciudades"
-              className=" text-neutral-700 hover:[color:var(--color-primary)] no-underline"
-            >
-              Ciudades
-            </Link>
-
-            <br />
-            <Link
-              to="/categorias"
-              className=" text-neutral-700 hover:[color:var(--color-primary)] no-underline"
-            >
-              Categorías
-            </Link>
             <br />
             <Link
               to="/sobre-nosotros"
